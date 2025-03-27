@@ -27,7 +27,7 @@ https://templatemo.com/tm-507-victory
 
 <body>
     <!-- header -->
-     <?php require_once '/parts/header.html'; ?>
+     <?php require_once 'parts/header.html' ?>
 
 
 
