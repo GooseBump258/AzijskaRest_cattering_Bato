@@ -35,11 +35,11 @@ https://templatemo.com/tm-507-victory
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <h4>Here you can find delecious foods</h4>
-                    <h2>cinska restika</h2>
-                    <p>Quisque nec nibh id lacus fringilla eleifend sed sit amet sem. Donec lectus odio, mollis a nisl non, tempor interdum nisl.</p>
+                    <h4>Tu nájdete výborné jedlá</h4>
+                    <h2>Čínska reštaurácia a cattering</h2>
+                    <p>Usporiadavate oslavu, meeting alebo máte len chuť na výbornú čísnku kuchyňu, tu ste správne</p>
                     <div class="primary-button">
-                        <a href="#" class="scroll-link" data-id="book-table">Order Right Now</a>
+                        <a href="#" class="scroll-link" data-id="book-table">Objednajte si teraz</a>
                     </div>
                 </div>
             </div>
@@ -58,9 +58,9 @@ https://templatemo.com/tm-507-victory
                 </div>
                 <div class="col-md-4">
                     <div class="cook-content">
-                        <h4>We cook delecious</h4>
+                        <h4>Varíme chutne a delikátne</h4>
                         <div class="contact-content">
-                            <span>You can call us on:</span>
+                            <span>Môžte nám zavolať na</span>
                             <h6>+ 1234 567 8910</h6>
                         </div>
                         <span>or</span>
@@ -87,7 +87,7 @@ https://templatemo.com/tm-507-victory
                     <div class="service-item">
                         <a href="menu.html">
                         <img src="img/cook_breakfast.png" alt="Breakfast">
-                        <h4>Breakfast</h4>
+                        <h4>Raňajky</h4>
                         </a>
                     </div>
                 </div>
@@ -95,7 +95,7 @@ https://templatemo.com/tm-507-victory
                     <div class="service-item">
                         <a href="menu.html">
                         <img src="img/cook_lunch.png" alt="Lunch">
-                        <h4>Lunch</h4>
+                        <h4>Obed</h4>
                         </a>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ https://templatemo.com/tm-507-victory
                     <div class="service-item">
                         <a href="menu.html">
                         <img src="img/cook_dinner.png" alt="Dinner">
-                        <h4>Dinner</h4>
+                        <h4>Večera</h4>
                         </a>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ https://templatemo.com/tm-507-victory
                     <div class="service-item">
                         <a href="menu.html">
                         <img src="img/cook_dessert.png" alt="Desserts">
-                        <h4>Desserts</h4>
+                        <h4>Dezerty</h4>
                         </a>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ https://templatemo.com/tm-507-victory
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Book Your Table Now</h2>
+                        <h2>Booknite si stôl</h2>
                     </div>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-12">
@@ -136,27 +136,27 @@ https://templatemo.com/tm-507-victory
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="right-info">
-                        <h4>Reservation</h4>
+                        <h4>Rezervácia</h4>
                         <form id="form-submit" action="" method="get">
                             <div class="row">
                                 <div class="col-md-6">
                                     <fieldset>
                                         <select required name='day' onchange='this.form.()'>
-                                            <option value="">Select day</option>
-                                            <option value="Monday">Monday</option>
-                                            <option value="Tuesday">Tuesday</option>
-                                            <option value="Wednesday">Wednesday</option>
-                                            <option value="Thursday">Thursday</option>
-                                            <option value="Friday">Friday</option>
-                                            <option value="Saturday">Saturday</option>
-                                            <option value="Sunday">Sunday</option>
+                                            <option value="">Vyberte si deň</option>
+                                            <option value="Monday">Pondelok</option>
+                                            <option value="Tuesday">Utorok</option>
+                                            <option value="Wednesday">Streda</option>
+                                            <option value="Thursday">Štvrtok</option>
+                                            <option value="Friday">Piatok</option>
+                                            <option value="Saturday">Sobota</option>
+                                            <option value="Sunday">Nedeľa</option>
                                         </select>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
                                         <select required name='hour' onchange='this.form.()'>
-                                            <option value="">Select hour</option>
+                                            <option value="">Vyberte si hodinu</option>
                                             <option value="10-00">10:00</option>
                                             <option value="12-00">12:00</option>
                                             <option value="14-00">14:00</option>
@@ -180,19 +180,19 @@ https://templatemo.com/tm-507-victory
                                 <div class="col-md-6">
                                     <fieldset>
                                         <select required class="person" name='persons' onchange='this.form.()'>
-                                            <option value="">How many persons?</option>
-                                            <option value="1-Person">1 Person</option>
-                                            <option value="2-Persons">2 Persons</option>
-                                            <option value="3-Persons">3 Persons</option>
-                                            <option value="4-Persons">4 Persons</option>
-                                            <option value="5-Persons">5 Persons</option>
-                                            <option value="6-Persons">6 Persons</option>
+                                            <option value="">Koľko ľudí?</option>
+                                            <option value="1-Person">1 </option>
+                                            <option value="2-Persons">2 </option>
+                                            <option value="3-Persons">3 </option>
+                                            <option value="4-Persons">4 </option>
+                                            <option value="5-Persons">5 </option>
+                                            <option value="6-Persons">6 </option>
                                         </select>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <button type="submit" id="form-submit" class="btn">Book Table</button>
+                                        <button type="submit" id="form-submit" class="btn">Booknite si stôl</button>
                                     </fieldset>
                                 </div>
                             </div>
@@ -209,10 +209,10 @@ https://templatemo.com/tm-507-victory
         <div class="container">
             <div class="row">
                 <div class="heading">
-                    <h2>Get application for your phone</h2>
+                    <h2>Získajte aplikáciu na telefón</h2>
                 </div>
                 <div class="primary-white-button">
-                    <a href="#">Download now</a>
+                    <a href="#">Inštalovať teraz</a>
                 </div>
             </div>
         </div>
@@ -224,28 +224,28 @@ https://templatemo.com/tm-507-victory
         <div class="container">
             <div class="row">
                 <div class="heading">
-                    <h2>Weekly Featured Food</h2>
+                    <h2>Týždenné menu</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="food-item">
-                        <h2>Breakfast</h2>
+                        <h2>Raňajky</h2>
                         <img src="img/breakfast_item.jpg" alt="">
                         <div class="price">$4.50</div>
                         <div class="text-content">
-                            <h4>Kale Chips Art Party</h4>
+                            <h4>Kale čipsy </h4>
                             <p>Dreamcatcher squid ennui cliche chicharros nes echo  small batch jean shorts hexagon street art knausgaard wolf...</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="food-item">
-                        <h2>Lunch</h2>
+                        <h2>Obed</h2>
                         <img src="img/lunch_item.jpg" alt="">
                         <div class="price">$7.50</div>
                         <div class="text-content">
-                            <h4>Taiyaki Gastro Tousled</h4>
+                            <h4>Taiyaki Gastro </h4>
                             <p>Dreamcatcher squid ennui cliche chicharros nes echo  small batch jean shorts hexagon street art knausgaard wolf...</p>
                         </div>
                     </div>
@@ -256,7 +256,7 @@ https://templatemo.com/tm-507-victory
                         <img src="img/dinner_item.jpg" alt="">
                         <div class="price">$12.50</div>
                         <div class="text-content">
-                            <h4>Batch Squid Jean Shorts</h4>
+                            <h4>Chobotnica</h4>
                             <p>Dreamcatcher squid ennui cliche chicharros nes echo  small batch jean shorts hexagon street art knausgaard wolf...</p>
                         </div>
                     </div>
@@ -272,7 +272,7 @@ https://templatemo.com/tm-507-victory
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Our blog post</h2>
+                        <h2>Naše posty</h2>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,7 @@ https://templatemo.com/tm-507-victory
                 <div class="col-md-6">
                     <div class="blog-post">
                         <img src="img/blog_post_01.jpg" alt="">
-                        <div class="date">26 Oct 2020</div>
+                        <div class="date">11.2.2025</div>
                         <div class="right-content">
                             <h4>Stumptown Tofu Schlitz</h4>
                             <span>Branding / Admin</span>
@@ -294,13 +294,13 @@ https://templatemo.com/tm-507-victory
                 <div class="col-md-6">
                     <div class="blog-post">
                         <img src="img/blog_post_02.jpg" alt="">
-                        <div class="date">21 Oct 2020</div>
+                        <div class="date">22.2.2025</div>
                         <div class="right-content">
                             <h4>Succulents Hashtag Folk</h4>
                             <span>Branding / Admin</span>
                             <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
                             <div class="text-button">
-                                <a href="#">Continue Reading</a>
+                                <a href="#">Pokračujte v čítaní</a>
                             </div>
                         </div>
                     </div>
@@ -308,13 +308,13 @@ https://templatemo.com/tm-507-victory
                 <div class="col-md-6">
                     <div class="blog-post">
                         <img src="img/blog_post_03.jpg" alt="">
-                        <div class="date">11 Oct 2020</div>
+                        <div class="date">9.2.2025</div>
                         <div class="right-content">
                             <h4>Knaus Sriracha Pinterest</h4>
                             <span>Dessert / Chef</span>
                             <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
                             <div class="text-button">
-                                <a href="#">Continue Reading</a>
+                                <a href="#">Pokračujte v čítaní</a>
                             </div>
                         </div>
                     </div>
@@ -322,13 +322,13 @@ https://templatemo.com/tm-507-victory
                 <div class="col-md-6">
                     <div class="blog-post">
                         <img src="img/blog_post_04.jpg" alt="">
-                        <div class="date">03 Oct 2020</div>
+                        <div class="date">8.3.2025</div>
                         <div class="right-content">
                             <h4>Crucifix Selvage Coat</h4>
                             <span>Plate / Chef</span>
                             <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
                             <div class="text-button">
-                                <a href="#">Continue Reading</a>
+                                <a href="#">Pokračujte v čítaní</a>
                             </div>
                         </div>
                     </div>
@@ -344,7 +344,7 @@ https://templatemo.com/tm-507-victory
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Signup for our newsletters</h2>
+                        <h2>Prihlásiť sa na odber</h2>
                     </div>
                 </div>
             </div>
@@ -357,7 +357,7 @@ https://templatemo.com/tm-507-victory
                     </div>
                     <div class="col-md-2">
                         <fieldset>
-                            <button type="submit" id="form-submit" class="btn">Send Message</button>
+                            <button type="submit" id="form-submit" class="btn">Poslať správu</button>
                         </fieldset>
                     </div>
                 </div>
