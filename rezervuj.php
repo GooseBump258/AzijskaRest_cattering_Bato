@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";       // zmeň podľa potreby
 $password = "";           // zmeň podľa potreby
-$dbname = "restauracia";
+$dbname = "restauracia_projekt";
 
 // pripojenie k databáze
 $conn = new mysqli($servername, $username, $password, $dbname);
