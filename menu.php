@@ -85,7 +85,7 @@ foreach ($menu_items as $item) {
             }
             .food-item img {
                 width: 100%;
-                height: 200px; /* Pevná výška obrázkov */
+                height: 250px; /* Zväčšená výška obrázkov pre väčšie jedlá */
                 object-fit: cover; /* Zabezpečí, že obrázok pokryje plochu bez deformácie */
                 border-bottom: 1px solid #eee;
             }
@@ -365,10 +365,10 @@ foreach ($menu_items as $item) {
                 <?php if (!empty($categorized_menu[$category])): // Inicializuj len ak sú položky v kategórii ?>
                     $('#owl-<?php echo $carousel_id; ?>').owlCarousel({
                         loop:true,
-                        margin:20, /* Medzera medzi položkami v karuseli */
+                        margin:30, /* Zväčšená medzera medzi položkami */
                         nav:true,
-                        pagination: false, /* Pôvodný templatem nepoužíva pagination, ale dots */
-                        dots: true, /* Zobrazenie bodiek pre navigáciu */
+                        pagination: false,
+                        dots: true,
                         responsive:{
                             0:{
                                 items:1
@@ -377,7 +377,7 @@ foreach ($menu_items as $item) {
                                 items:2
                             },
                             1000:{
-                                items:3
+                                items:4 /* Zmenené na 4 položky pre väčšie obrazovky */
                             }
                         }
                     });
