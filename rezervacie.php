@@ -149,13 +149,13 @@ try {
                         <?php foreach ($rezervacie as $rez): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($rez['id']); ?></td>
-                                <td><?php echo htmlspecialchars($rez['datum']); ?></td>
                                 <td><?php echo htmlspecialchars($rez['den']); ?></td>
                                 <td><?php echo htmlspecialchars($rez['hodina']); ?></td>
                                 <td><?php echo htmlspecialchars($rez['meno']); ?></td>
-                                <td><?php echo htmlspecialchars($rez['osoby']); ?></td>
                                 <td><?php echo htmlspecialchars($rez['telefon']); ?></td>
-                                <td><?php echo htmlspecialchars($rez['created_at']); ?></td>
+                                <td><?php echo htmlspecialchars($rez['osoby']); ?></td>
+                                <td><?php echo htmlspecialchars($rez['datum']); ?></td>
+                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
