@@ -136,13 +136,13 @@ try {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Dátum</th>
                             <th>Deň</th>
                             <th>Čas</th>
-                            <th>Meno</th>
-                            <th>Počet Osôb</th>
-                            <th>Telefón</th>
+                            <th>Tel. číslo</th>
+                            <th>Počet osôb</th>
                             <th>Vytvorené</th>
+                            
+                            
                         </tr>
                     </thead>
                     <tbody>
