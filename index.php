@@ -137,48 +137,63 @@ https://templatemo.com/tm-507-victory
                 <div class="col-md-4 col-sm-12">
                     <div class="right-info">
                         <h4>Rezervácia</h4>
-                        <form id="inner-form-submit" action="rezervuj.php" method="post"> <div class="row">
+                        <form id="form-submit" action="" method="get">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input type="text" class="form-control" id="datepicker" name="datum" placeholder="Vyberte si dátum" required="">
+                                        <select required name='day' onchange='this.form.()'>
+                                            <option value="">Vyberte si deň</option>
+                                            <option value="Monday">Pondelok</option>
+                                            <option value="Tuesday">Utorok</option>
+                                            <option value="Wednesday">Streda</option>
+                                            <option value="Thursday">Štvrtok</option>
+                                            <option value="Friday">Piatok</option>
+                                            <option value="Saturday">Sobota</option>
+                                            <option value="Sunday">Nedeľa</option>
+                                        </select>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
                                         <select required name='hour' onchange='this.form.()'>
                                             <option value="">Vyberte si hodinu</option>
-                                            <option value="10:00">10:00</option> <option value="12:00">12:00</option>
-                                            <option value="14:00">14:00</option>
-                                            <option value="16:00">16:00</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="20:00">20:00</option>
-                                            <option value="22:00">22:00</option>
+                                            <option value="10-00">10:00</option>
+                                            <option value="12-00">12:00</option>
+                                            <option value="14-00">14:00</option>
+                                            <option value="16-00">16:00</option>
+                                            <option value="18-00">18:00</option>
+                                            <option value="20-00">20:00</option>
+                                            <option value="22-00">22:00</option>
                                         </select>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input name="meno" type="text" class="form-control" id="meno" placeholder="Full name" required=""> </fieldset> 
+                                        <input name="name" type="name" class="form-control" id="name" placeholder="Full name" required="">
+                                    </fieldset> 
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input name="telefon" type="tel" class="form-control" id="telefon" placeholder="Phone number" required=""> </fieldset>
+                                        <input name="phone" type="phone" class="form-control" id="phone" placeholder="Phone number" required="">
+                                    </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <select required class="person" name='osoby' onchange='this.form.()'> <option value="">Koľko ľudí?</option>
-                                            <option value="1">1 </option>
-                                            <option value="2">2 </option>
-                                            <option value="3">3 </option>
-                                            <option value="4">4 </option>
-                                            <option value="5">5 </option>
-                                            <option value="6">6 </option>
+                                        <select required class="person" name='persons' onchange='this.form.()'>
+                                            <option value="">Koľko ľudí?</option>
+                                            <option value="1-Person">1 </option>
+                                            <option value="2-Persons">2 </option>
+                                            <option value="3-Persons">3 </option>
+                                            <option value="4-Persons">4 </option>
+                                            <option value="5-Persons">5 </option>
+                                            <option value="6-Persons">6 </option>
                                         </select>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <button type="submit" id="submit-button" class="btn">Booknite si stôl</button> </fieldset>
+                                        <button type="submit" id="form-submit" class="btn">Booknite si stôl</button>
+                                    </fieldset>
                                 </div>
                             </div>
                         </form>
@@ -189,29 +204,6 @@ https://templatemo.com/tm-507-victory
     </section>
 </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script>
-    $( function() {
-        $( "#datepicker" ).datepicker({
-            dateFormat: "yy-mm-dd", // Formát dátumu pre databázu (YYYY-MM-DD)
-            minDate: 0, // Zakáže výber dátumov v minulosti
-            // Ak chceš obmedziť výber len na vybrané dni (napr. Po-Ne), potrebuješ funkciu beforeShowDay
-            // Napr. len na dni od Pondelka do Piatku:
-            // beforeShowDay: function(date) {
-            //     var day = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-            //     return [(day != 0 && day != 6)]; // Povoliť všetky dni okrem nedele (0) a soboty (6)
-            // }
-        });
-    } );
-</script>
 
    
 
