@@ -1,12 +1,12 @@
 <?php
-// db_config.php
+
 
 // Nastavenia databázy
-$host = 'localhost'; // Zvyčajne 'localhost', ak beží databáza na rovnakom serveri
-$db   = 'restauracia_projekt'; // Názov tvojej databázy
-$user = 'root';       // Tvoje databázové používateľské meno
-$pass = '';      // Tvoje databázové heslo
-$charset = 'utf8mb4';          // Odporúčané pre plnú podporu znakov
+$host = 'localhost'; 
+$db   = 'restauracia_projekt'; 
+$user = 'root';       
+$pass = '';      
+$charset = 'utf8mb4';          
 
 // Data Source Name (DSN) pre PDO
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

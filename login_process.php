@@ -11,10 +11,10 @@ if (isset($_POST['username_email']) && isset($_POST['password'])) {
     $password = $_POST['password'];
 
     try {
-        // --- ZMENA JE TU: Použi dva rôzne placeholdery ---
+        
         $stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE username = :user_param OR email = :email_param");
 
-        // --- A tu odovzdaj hodnoty pre oba ---
+        
         $stmt->execute([
             'user_param' => $username_email,
             'email_param' => $username_email
