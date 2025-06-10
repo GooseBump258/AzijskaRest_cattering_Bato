@@ -48,7 +48,7 @@ try {
             margin-bottom: 10px;
         }
         .page-heading p {
-            color: #666;
+            color: #f2f2f2;
             font-size: 1.1em;
         }
         .table-container {
