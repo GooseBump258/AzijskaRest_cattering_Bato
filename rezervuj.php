@@ -24,10 +24,14 @@ $sql = "INSERT INTO rezervacie (den, hodina, meno, telefon, osoby)
         VALUES ('$den', '$hodina', '$meno', '$telefon', '$osoby')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Rezervácia bola úspešne odoslaná.";
+    
+          exit();
+
 } else {
     echo "Chyba: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
 ?>
+
+
