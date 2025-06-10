@@ -17,7 +17,7 @@ $error_message = '';
 try {
     // Načítanie všetkých rezervácií z tabuľky 'rezervacie'
     // Zoradené podľa dátumu (najnovšie prvé) a času
-    $stmt = $pdo->query("SELECT id, den, hodina, meno, osoby, telefon, datum, created_at FROM rezervacie ORDER BY datum DESC, hodina DESC");
+    $stmt = $pdo->query("SELECT id, den, hodina, meno, osoby, telefon, datum FROM rezervacie ORDER BY datum DESC, hodina DESC");
     $rezervacie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error_message = 'Chyba pri načítaní rezervácií: ' . $e->getMessage();
