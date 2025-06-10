@@ -24,7 +24,7 @@ $sql = "INSERT INTO rezervacie (den, hodina, meno, telefon, osoby)
         VALUES ('$den', '$hodina', '$meno', '$telefon', '$osoby')";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: index.html?success=1");
+    header("Location: index.php?success=1");
 exit();
 
 
