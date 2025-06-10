@@ -138,6 +138,7 @@ try {
                             <th>ID</th>
                             <th>Deň</th>
                             <th>Čas</th>
+                            <th>Meno</th>
                             <th>Tel. číslo</th>
                             <th>Počet osôb</th>
                             <th>Vytvorené</th>
