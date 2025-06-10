@@ -43,7 +43,7 @@ try {
             margin-bottom: 30px;
         }
         .page-heading h1 {
-            color: #333;
+            color: #f2f2f2;
             font-size: 3em;
             margin-bottom: 10px;
         }
