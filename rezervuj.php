@@ -24,15 +24,13 @@ $sql = "INSERT INTO rezervacie (den, hodina, meno, telefon, osoby)
         VALUES ('$den', '$hodina', '$meno', '$telefon', '$osoby')";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: index.php?success=1");
-exit();
-
-
+    echo "<script>
+        alert('Rezervácia bola úspešná!\\nMeno: $meno\\nTelefón: $telefon\\nDeň: $den\\nHodina: $hodina\\nPočet osôb: $osoby');
+        </script>";
 } else {
     echo "Chyba: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
 ?>
-
 
