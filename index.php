@@ -120,7 +120,7 @@ https://templatemo.com/tm-507-victory
     </section>
 
 
-
+<form id="form-submit" action="rezervuj.php" method="post">
     <section id="book-table">
         <div class="container">
             <div class="row">
@@ -202,21 +202,10 @@ https://templatemo.com/tm-507-victory
             </div>
         </div>
     </section>
+</form>
 
 
-
-    <section class="get-app">
-        <div class="container">
-            <div class="row">
-                <div class="heading">
-                    <h2>Získajte aplikáciu na telefón</h2>
-                </div>
-                <div class="primary-white-button">
-                    <a href="#">Inštalovať teraz</a>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
 
 
