@@ -26,6 +26,7 @@ $sql = "INSERT INTO rezervacie (den, hodina, meno, telefon, osoby)
 if ($conn->query($sql) === TRUE) {
     echo "<script>
         alert('Rezervácia bola úspešná!\\nMeno: $meno\\nTelefón: $telefon\\nDeň: $den\\nHodina: $hodina\\nPočet osôb: $osoby');
+        window.location.href = 'index.php';
         </script>";
 } else {
     echo "Chyba: " . $sql . "<br>" . $conn->error;
