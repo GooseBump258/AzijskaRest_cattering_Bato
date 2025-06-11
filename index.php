@@ -143,13 +143,13 @@ https://templatemo.com/tm-507-victory
                                     <fieldset>
                                         <select required name='day' onchange='this.form.()'>
                                             <option value="">Vyberte si deň</option>
-                                            <option value="Monday">Pondelok</option>
-                                            <option value="Tuesday">Utorok</option>
-                                            <option value="Wednesday">Streda</option>
-                                            <option value="Thursday">Štvrtok</option>
-                                            <option value="Friday">Piatok</option>
-                                            <option value="Saturday">Sobota</option>
-                                            <option value="Sunday">Nedeľa</option>
+                                            <option value="Pondelok">Pondelok</option>
+                                            <option value="Utorok">Utorok</option>
+                                            <option value="Streda">Streda</option>
+                                            <option value="Štvrtok">Štvrtok</option>
+                                            <option value="Piatok">Piatok</option>
+                                            <option value="Sobota">Sobota</option>
+                                            <option value="Nedeľa">Nedeľa</option>
                                         </select>
                                     </fieldset>
                                 </div>
