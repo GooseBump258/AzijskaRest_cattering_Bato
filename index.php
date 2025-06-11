@@ -131,7 +131,7 @@ https://templatemo.com/tm-507-victory
         <div class="container">
             <div class="row">
                 <div class="heading">
-                    <h2>Týždenné menu</h2>
+                    <h2>Top špeciality</h2>
                 </div>
             </div>
             <div class="row">
@@ -142,7 +142,9 @@ https://templatemo.com/tm-507-victory
                         <div class="price">$4.50</div>
                         <div class="text-content">
                             <h4>Kale čipsy </h4>
-                            <p>Dreamcatcher squid ennui cliche chicharros nes echo  small batch jean shorts hexagon street art knausgaard wolf...</p>
+                            <p>A potom sú tu kelové čipsy – zdravá a chrumkavá alternatíva k tradičným zemiakovým lupienkom. Plné vitamínov a s ľahko orieškovou chuťou, sú dokonalým doplnkom, ktorý vyvažuje bohatosť morských plodov a pridáva do jedálnička svieži, zelený nádych.
+
+</p>
                         </div>
                     </div>
                 </div>
@@ -153,7 +155,7 @@ https://templatemo.com/tm-507-victory
                         <div class="price">$7.50</div>
                         <div class="text-content">
                             <h4>Taiyaki Gastro </h4>
-                            <p>Dreamcatcher squid ennui cliche chicharros nes echo  small batch jean shorts hexagon street art knausgaard wolf...</p>
+                            <p>Svet chutí je nekonečný a niekedy tie najprekvapivejšie kombinácie prinesú najväčšie zážitky. Vezmite si napríklad chobotnicu, ktorá sa s jej delikátnou textúrou a jemnou chuťou stáva hviezdou mnohých stredomorských jedál. Či už grilovaná, dusená alebo v šaláte, vždy ponúka nezameniteľný gurmánsky pôžitok.</p>
                         </div>
                     </div>
                 </div>
@@ -164,7 +166,7 @@ https://templatemo.com/tm-507-victory
                         <div class="price">$12.50</div>
                         <div class="text-content">
                             <h4>Chobotnica</h4>
-                            <p>Dreamcatcher squid ennui cliche chicharros nes echo  small batch jean shorts hexagon street art knausgaard wolf...</p>
+                            <p>Popri nej sa často objavujú kalamáre, ktoré sú zase chrumkavým potešením, najmä keď sú jemne osmažené a podávané s čerstvým citrónom. Ich ľahká, morská chuť a príjemná textúra ich robia obľúbenou voľbou pre rýchle občerstvenie aj elegantné predjedlo.</p>
                         </div>
                     </div>
                 </div>
