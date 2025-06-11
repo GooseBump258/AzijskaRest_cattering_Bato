@@ -93,7 +93,7 @@ https://templatemo.com/tm-507-victory
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="service-item">
-                        <a href="menu.html">
+                        <a href="menu.php">
                         <img src="img/cook_lunch.png" alt="Lunch">
                         <h4>Obed</h4>
                         </a>
@@ -101,7 +101,7 @@ https://templatemo.com/tm-507-victory
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="service-item">
-                        <a href="menu.html">
+                        <a href="menu.php">
                         <img src="img/cook_dinner.png" alt="Dinner">
                         <h4>Večera</h4>
                         </a>
@@ -109,7 +109,7 @@ https://templatemo.com/tm-507-victory
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="service-item">
-                        <a href="menu.html">
+                        <a href="menu.php">
                         <img src="img/cook_dessert.png" alt="Desserts">
                         <h4>Dezerty</h4>
                         </a>
