@@ -53,24 +53,24 @@
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input name="name" type="name" class="form-control" id="name" placeholder="Full name" required="">
+                                        <input name="name" type="name" class="form-control" id="name" placeholder="Meno a priezvisko" required="">
                                     </fieldset> 
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input name="phone" type="phone" class="form-control" id="phone" placeholder="Phone number" required="">
+                                        <input name="phone" type="phone" class="form-control" id="phone" placeholder="Telefónne číslo" required="">
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
                                         <select required class="person" name='persons' onchange='this.form.()'>
                                             <option value="">Koľko ľudí?</option>
-                                            <option value="1-Person">1 </option>
-                                            <option value="2-Persons">2 </option>
-                                            <option value="3-Persons">3 </option>
-                                            <option value="4-Persons">4 </option>
-                                            <option value="5-Persons">5 </option>
-                                            <option value="6-Persons">6 </option>
+                                            <option value="1-osoba">1 </option>
+                                            <option value="2-osoby">2 </option>
+                                            <option value="3-osoby">3 </option>
+                                            <option value="4-osoby">4 </option>
+                                            <option value="5-osoby">5 </option>
+                                            <option value="6-osoby">6 </option>
                                         </select>
                                     </fieldset>
                                 </div>
