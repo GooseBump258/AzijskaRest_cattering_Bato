@@ -63,9 +63,9 @@ https://templatemo.com/tm-507-victory
                             <span>Môžte nám zavolať na</span>
                             <h6>+ 1234 567 8910</h6>
                         </div>
-                        <span>or</span>
+                        <span>alebo</span>
                         <div class="primary-white-button">
-                            <a href="#" class="scroll-link" data-id="book-table">Order Now</a>
+                            <a href="#" class="scroll-link" data-id="book-table">Objednajte teraz</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ https://templatemo.com/tm-507-victory
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="service-item">
-                        <a href="menu.html">
+                        <a href="menu.php">
                         <img src="img/cook_breakfast.png" alt="Breakfast">
                         <h4>Raňajky</h4>
                         </a>
@@ -180,31 +180,7 @@ https://templatemo.com/tm-507-victory
 
 
 
-    <section class="sign-up">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="heading">
-                        <h2>Prihlásiť sa na odber</h2>
-                    </div>
-                </div>
-            </div>
-            <form id="contact" action="" method="get">
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-3">
-                        <fieldset>
-                            <input name="email" type="text" class="form-control" id="email" placeholder="Enter your email here..." required="">
-                        </fieldset>
-                    </div>
-                    <div class="col-md-2">
-                        <fieldset>
-                            <button type="submit" id="form-submit" class="btn">Poslať správu</button>
-                        </fieldset>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
+    
 
 
 
