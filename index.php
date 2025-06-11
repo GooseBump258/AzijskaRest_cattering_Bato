@@ -256,75 +256,7 @@ https://templatemo.com/tm-507-victory
 
 
 
-    <section class="our-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="heading">
-                        <h2>Naše posty</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="blog-post">
-                        <img src="img/blog_post_01.jpg" alt="">
-                        <div class="date">11.2.2025</div>
-                        <div class="right-content">
-                            <h4>Stumptown Tofu Schlitz</h4>
-                            <span>Branding / Admin</span>
-                            <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
-                            <div class="text-button">
-                                <a href="#">Continue Reading</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="blog-post">
-                        <img src="img/blog_post_02.jpg" alt="">
-                        <div class="date">22.2.2025</div>
-                        <div class="right-content">
-                            <h4>Succulents Hashtag Folk</h4>
-                            <span>Branding / Admin</span>
-                            <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
-                            <div class="text-button">
-                                <a href="#">Pokračujte v čítaní</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="blog-post">
-                        <img src="img/blog_post_03.jpg" alt="">
-                        <div class="date">9.2.2025</div>
-                        <div class="right-content">
-                            <h4>Knaus Sriracha Pinterest</h4>
-                            <span>Dessert / Chef</span>
-                            <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
-                            <div class="text-button">
-                                <a href="#">Pokračujte v čítaní</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="blog-post">
-                        <img src="img/blog_post_04.jpg" alt="">
-                        <div class="date">8.3.2025</div>
-                        <div class="right-content">
-                            <h4>Crucifix Selvage Coat</h4>
-                            <span>Plate / Chef</span>
-                            <p>Skateboard iceland twee tofu shaman crucifix vice before they sold out corn hole occupy drinking vinegar chambra meggings kale chips hexagon...</p>
-                            <div class="text-button">
-                                <a href="#">Pokračujte v čítaní</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
 
 
