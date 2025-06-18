@@ -1,10 +1,8 @@
 <?php
-// admin_panel.php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
+require_once 'db_config.php'; // <--- Uisti sa, že toto existuje a správne nastavuje $pdo
 
-// Kontrola, či je používateľ prihlásený A či je administrátor (podľa stĺpca 'role' v DB)
+// Kontrola, či je používateľ prihlásený
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
     header('Location: index.php');
