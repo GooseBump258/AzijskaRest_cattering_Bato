@@ -44,12 +44,12 @@ if (isset($_POST['username_email']) && isset($_POST['password'])) {
         // V produkčnom prostredí by si mal logovať chybu namiesto jej zobrazovania.
         // error_log("Login DB error: " . $e->getMessage());
         $_SESSION['error_message'] = "Nastala chyba pri prihlasovaní. Prosím, skúste to neskôr.";
-        header('Location: index.php'); // Vráti používateľa na prihlasovaciu stránku (alebo index.php)
+        header('Location: ../index.php'); // Vráti používateľa na prihlasovaciu stránku (alebo index.php)
         exit();
     }
 } else {
     $_SESSION['error_message'] = "Prosím, vyplňte prihlasovacie údaje.";
-    header('Location: index.php'); // Vráti používateľa na prihlasovaciu stránku (alebo index.php)
+    header('Location: ../index.php'); // Vráti používateľa na prihlasovaciu stránku (alebo index.php)
     exit();
 }
 ?>

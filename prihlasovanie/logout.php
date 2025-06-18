@@ -11,6 +11,6 @@ session_unset();
 session_destroy();
 
 // Presmeruje používateľa na domovskú stránku
-header('Location: index.php');
+header('Location: ../index.php');
 exit();
 ?>
