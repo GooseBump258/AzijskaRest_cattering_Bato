@@ -1,8 +1,3 @@
-<?php
-// rezervacny_formular_original.php
-// Tento súbor obsahuje pôvodný HTML formulár pre rezerváciu stola, upravený tak, aby sa zadával presný dátum.
-?>
-
 <form id="form-submit" action="rezervuj.php" method="post">
     <section id="book-table">
         <div class="container">
@@ -20,7 +15,7 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="right-info">
                         <h4>Rezervácia</h4>
-                        
+                        <div class="row">
                             <div class="col-md-6">
                                 <fieldset>
                                     <input type="date" name="datum_rezervacie" required>
@@ -63,7 +58,7 @@
                                     </select>
                                 </fieldset>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <fieldset>
                                     <button type="submit" class="btn">Booknite si stôl</button>
                                 </fieldset>
