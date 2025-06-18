@@ -120,7 +120,7 @@ https://templatemo.com/tm-507-victory
     </section>
 
 
-<?php require_once 'triedy/rezervacny_formular_original.php'; ?>
+<?php require_once 'rezervacie/rezervacny_formular_original.php'; ?>
 
 
    

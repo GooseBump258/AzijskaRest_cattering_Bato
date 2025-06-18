@@ -248,7 +248,7 @@ foreach ($menu_items as $item) {
     <?php endif; ?>
 
 
-    <?php require_once 'triedy/rezervacny_formular_original.php'; ?>
+    <?php require_once 'rezervacie/rezervacny_formular_original.php'; ?>
 
 
     <?php require_once 'parts/footer.html' ?>
