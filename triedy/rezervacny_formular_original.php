@@ -1,6 +1,4 @@
-<?php
-require_once 'triedy/db_config.php';
-?>
+
 
 
 
@@ -87,3 +85,4 @@ require_once 'triedy/db_config.php';
         </div>
     </section>
 </form>
+
