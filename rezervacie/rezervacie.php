@@ -127,7 +127,7 @@ try {
     </style>
 </head>
 <body>
-    <?php require_once 'parts/header.html' ?>
+    <?php require_once '../parts/header.html' ?>
 
     <section class="page-heading">
         <div class="container">
