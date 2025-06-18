@@ -68,17 +68,19 @@ foreach ($menu_items as $item) {
                 padding-left: 15px;
             }
             .food-item {
+    position: relative;
     width: 250px;
-    height: 280px;
+    height: 300px; /* trochu vyššie */
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     overflow: hidden;
-    margin: 0 auto 30px auto;
+    margin: 0 20px 20px 0; /* margin right + bottom 20px */
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .food-item:hover {
@@ -96,27 +98,12 @@ foreach ($menu_items as $item) {
     flex-shrink: 0;
 }
 
-.food-item .price {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: #d9534f;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 16px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-    z-index: 10;
-}
-
 .food-item .text-content {
     padding: 15px 20px;
     flex-grow: 1;
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .food-item .text-content h4 {
@@ -132,16 +119,17 @@ foreach ($menu_items as $item) {
     font-size: 13px;
     color: #555;
     line-height: 1.4;
-    margin: 0;
+    margin: 0 0 10px 0;
     text-align: center;
 }
 
-/* Aby cena bola vo vrchnej časti nad obrázkom */
 .food-item .price {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    color: #d9534f;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: right;
 }
+
 
             .food-item .text-content {
                 padding: 50px;
