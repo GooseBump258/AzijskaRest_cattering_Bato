@@ -1,7 +1,7 @@
 <?php
 // rezervacie.php
 session_start();
-require_once 'db_config.php';
+require_once 'triedy/db_config.php';
 
 // Kontrola, či je používateľ prihlásený a má rolu 'reception'
 // Ak chceš, aby k tomu mal prístup aj 'admin', môžeš pridať || $_SESSION['user_role'] === 'admin'

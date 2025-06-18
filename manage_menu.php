@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once 'db_config.php';
+require_once 'triedy/db_config.php';
 
 // Kontrola admin prístupu
 if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] !== 1) {

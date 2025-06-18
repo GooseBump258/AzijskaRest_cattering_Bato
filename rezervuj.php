@@ -1,8 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";       // zmeň podľa potreby
-$password = "";           // zmeň podľa potreby
-$dbname = "restauracia_projekt";
+// rezervacie.php
+session_start();
+require_once 'triedy/db_config.php';
 
 // pripojenie k databáze
 $conn = new mysqli($servername, $username, $password, $dbname);

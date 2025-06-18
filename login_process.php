@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once 'db_config.php';
+require_once 'triedy/db_config.php';
 
 if (isset($_POST['username_email']) && isset($_POST['password'])) {
     $username_email = trim($_POST['username_email']);
