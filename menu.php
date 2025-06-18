@@ -81,8 +81,8 @@ foreach ($menu_items as $item) {
                 transform: translateY(-5px);
             }
             .food-item img {
-                width: 1000%;
-                height: auto; /* obrazok nebude orezany, zachova proporcie */
+                width: 100%;
+                
                 max-height: 250px; /* maximalna vyska pre jednotny rozmer */
                 object-fit: contain; /* obrazok sa prispôsobí celej ploche bez orezania */
                 background-color: #f9f9f9; /* jemne pozadie, ak je obrazok mensi */
@@ -97,7 +97,7 @@ foreach ($menu_items as $item) {
                 padding: 5px 10px;
                 border-radius: 5px;
                 font-weight: bold;
-                font-size: 1.1em;
+                font-size: 20px;
                 z-index: 10;
             }
             .food-item .text-content {
