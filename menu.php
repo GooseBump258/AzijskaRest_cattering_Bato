@@ -1,5 +1,4 @@
 <?php
-// menu.php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -8,18 +7,15 @@ require_once(__DIR__ . '/triedy/db_config.php');
 
 $menu_items = [];
 try {
-    // Načítanie všetkých položiek menu z databázy
     $stmt = $pdo->query("SELECT * FROM menu_items ORDER BY category, name");
     $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $menu_items = [];
-    $_SESSION['error_message'] = "Nastala chyba pri načítaní menu. Prosím, skúste to neskôr.";
+    $_SESSION['error_message'] = "Nastala chyba pri načítaní menu.";
 }
 
-// Definujeme iba 3 kategórie: Raňajky, Obed, Večera
 $allowed_categories = ['Raňajky', 'Obed', 'Večera'];
 
-// Zoskupenie položiek podľa kategórie
 $categorized_menu = [
     'Raňajky' => [],
     'Obed' => [],
@@ -33,244 +29,80 @@ foreach ($menu_items as $item) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="sk">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Victory - Naše Menu</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/fontAwesome.css">
-    <link rel="stylesheet" href="css/hero-slider.css">
-    <link rel="stylesheet" href="css/owl-carousel.css">
-    <link rel="stylesheet" href="css/templatemo-style.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Spectral:200,300,400,500,600,700,800" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>Menu</title>
     <style>
-        .menu-category-section {
-            margin-top: 50px;
-            padding-bottom: 30px;
-        }
-        .menu-category-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.8em;
-            color: #333;
-        }
+        body { font-family: Arial, sans-serif; background: #f8f8f8; padding: 20px; }
+        h2 { margin-top: 40px; }
+        .category { margin-bottom: 40px; }
         .food-item {
-            background-color: #fff;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            overflow: hidden;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 0 8px #ccc;
             margin-bottom: 20px;
-            transition: transform 0.2s ease-in-out;
-            position: relative;
-        }
-        .food-item:hover {
-            transform: translateY(-5px);
+            overflow: hidden;
+            max-width: 350px;
         }
         .food-item img {
             width: 100%;
-            height: 350px; /* Veľké obrázky */
+            height: 250px;
             object-fit: cover;
-            border-bottom: 1px solid #eee;
+            display: block;
         }
-        .food-item .price {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #d9534f;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
+        .food-info {
+            padding: 10px;
+        }
+        .food-info h3 {
+            margin: 0 0 5px;
             font-size: 1.2em;
-            z-index: 10;
         }
-        .food-item .text-content {
-            padding: 15px;
-        }
-        .food-item .text-content h4 {
-            font-size: 1.6em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .food-item .text-content p {
-            font-size: 1em;
-            color: #666;
-            line-height: 1.5;
-        }
-        /* Owl Carousel šípky a bodky */
-        .owl-nav {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .owl-nav button {
-            background: #f7f7f7;
+        .food-info p {
+            margin: 0 0 10px;
             color: #555;
-            border: 1px solid #ddd;
-            padding: 8px 15px;
-            margin: 0 5px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            font-size: 0.9em;
+            min-height: 40px;
         }
-        .owl-nav button:hover {
-            background: #eee;
-            color: #333;
+        .price {
+            font-weight: bold;
+            color: #d9534f;
+            font-size: 1em;
         }
-        .owl-dots {
-            text-align: center;
-            margin-top: 15px;
-        }
-        .owl-dots button.owl-dot {
-            width: 12px;
-            height: 12px;
-            background: #ccc;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 5px;
-            transition: all 0.3s ease;
-        }
-        .owl-dots button.owl-dot.active {
-            background: #d9534f;
+        .items-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
         }
     </style>
 </head>
 <body>
-    <?php require_once 'parts/header.html' ?>
 
-    <section class="page-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Naše Menu</h1>
-                    <p>Objavte naše vynikajúce jedlá a nápoje pripravené s láskou a z čerstvých surovín.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<?php
+if (isset($_SESSION['error_message'])) {
+    echo '<p style="color:red;">' . htmlspecialchars($_SESSION['error_message']) . '</p>';
+    unset($_SESSION['error_message']);
+}
 
-    <?php
-    if (isset($_SESSION['error_message'])) {
-        echo '<div class="container"><p class="message error">' . htmlspecialchars($_SESSION['error_message']) . '</p></div>';
-        unset($_SESSION['error_message']);
-    }
-    if (isset($_SESSION['success_message'])) {
-        echo '<div class="container"><p class="message success">' . htmlspecialchars($_SESSION['success_message']) . '</p></div>';
-        unset($_SESSION['success_message']);
-    }
-    ?>
-
-    <?php if (empty($menu_items)): ?>
-        <div class="container text-center" style="padding: 50px 0;">
-            <p>Momentálne nemáme žiadne položky v menu. Skúste nás navštíviť neskôr!</p>
-            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === 1): ?>
-                <p><a href="manage_menu.php" class="btn btn-primary" style="margin-top: 20px;">Pridať položky do menu</a></p>
-            <?php endif; ?>
-        </div>
-    <?php else: ?>
-
-        <?php foreach ($categorized_menu as $category_name => $items_in_category):
-            if (empty($items_in_category)) {
-                continue;
-            }
-            // obrázky kategórií podľa názvu
-            $category_image = '';
-            if ($category_name == 'Raňajky') {
-                $category_image = 'img/breakfast_menu.jpg';
-            } elseif ($category_name == 'Obed') {
-                $category_image = 'img/lunch_menu.jpg';
-            } elseif ($category_name == 'Večera') {
-                $category_image = 'img/dinner_menu.jpg';
-            } else {
-                $category_image = 'https://via.placeholder.com/400x300?text=' . urlencode($category_name);
-            }
-        ?>
-        <section class="menu-category-section <?php echo strtolower(str_replace(' ', '-', $category_name)); ?>-menu">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h2><?php echo htmlspecialchars($category_name); ?></h2>
-                        <img src="<?php echo $category_image; ?>" alt="<?php echo htmlspecialchars($category_name); ?>" style="max-width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 30px;">
+foreach ($categorized_menu as $category => $items):
+    if (empty($items)) continue;
+?>
+    <div class="category">
+        <h2><?php echo htmlspecialchars($category); ?></h2>
+        <div class="items-wrapper">
+            <?php foreach ($items as $item): ?>
+                <div class="food-item">
+                    <img src="<?php echo htmlspecialchars($item['image_path'] ?: 'https://via.placeholder.com/350x250?text=No+Image'); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" />
+                    <div class="food-info">
+                        <h3><?php echo htmlspecialchars($item['name']); ?></h3>
+                        <p><?php echo nl2br(htmlspecialchars($item['description'])); ?></p>
+                        <div class="price"><?php echo number_format($item['price'], 2, ',', ' ') . ' €'; ?></div>
                     </div>
                 </div>
-                <div class="row owl-carousel owl-theme" id="owl-<?php echo strtolower(str_replace(' ', '-', $category_name)); ?>">
-                    <?php foreach ($items_in_category as $item): ?>
-                        <div class="item col-md-12">
-                            <div class="food-item">
-                                <?php if ($item['image_path']): ?>
-                                    <img src="<?php echo htmlspecialchars($item['image_path']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
-                                <?php else: ?>
-                                    <img src="https://via.placeholder.com/400x350?text=Bez+obrázka" alt="Bez obrázka">
-                                <?php endif; ?>
-                                <div class="price"><?php echo htmlspecialchars(number_format($item['price'], 2, ',', ' ')) . ' €'; ?></div>
-                                <div class="text-content">
-                                    <h4><?php echo htmlspecialchars($item['name']); ?></h4>
-                                    <p><?php echo nl2br(htmlspecialchars($item['description'])); ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-        <?php endforeach; ?>
-
-    <?php endif; ?>
-
-    <?php require_once 'rezervacie/rezervacny_formular_original.php'; ?>
-    <?php require_once 'parts/footer.html' ?>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-    <script src="js/vendor/bootstrap.min.js"></script>
-
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            <?php foreach (array_keys($categorized_menu) as $category): ?>
-                <?php $carousel_id = strtolower(str_replace(' ', '-', $category)); ?>
-                <?php if (!empty($categorized_menu[$category])): ?>
-                    $('#owl-<?php echo $carousel_id; ?>').owlCarousel({
-                        loop:true,
-                        margin:30,
-                        nav:true,
-                        pagination: false,
-                        dots: true,
-                        responsive:{
-                            0:{items:1},
-                            600:{items:2},
-                            1000:{items:3}
-                        }
-                    });
-                <?php endif; ?>
             <?php endforeach; ?>
-        });
+        </div>
+    </div>
+<?php endforeach; ?>
 
-        function scrollToID(id, speed){
-            var offSet = 0;
-            var targetOffset = $(id).offset().top - offSet;
-            var mainNav = $('#main-nav');
-            $('html,body').animate({scrollTop:targetOffset}, speed);
-            if (mainNav.hasClass("open")) {
-                mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-                mainNav.removeClass("open");
-            }
-        }
-        if (typeof console === "undefined") {
-            console = { log: function() { } };
-        }
-    </script>
 </body>
 </html>
