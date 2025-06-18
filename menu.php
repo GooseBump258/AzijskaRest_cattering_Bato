@@ -84,6 +84,7 @@ foreach ($menu_items as $item) {
                 width: 100%;
                 
                 max-height: 250px; /* maximalna vyska pre jednotny rozmer */
+                max-width: 250px;
                 object-fit: contain; /* obrazok sa prispôsobí celej ploche bez orezania */
                 background-color: #f9f9f9; /* jemne pozadie, ak je obrazok mensi */
                 border-bottom: 1px solid #eee;
