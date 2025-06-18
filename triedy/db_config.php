@@ -11,7 +11,7 @@ $charset = 'utf8mb4';
 // Data Source Name (DSN) pre PDO
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
-// Voliteľné nastavenia PDO
+// Voliteľné nastavenia PDO uprava
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Zapne výnimky pre chyby, čo je lepšie pre ladenie
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Predvolený spôsob načítania dát (ako asociatívne pole)
