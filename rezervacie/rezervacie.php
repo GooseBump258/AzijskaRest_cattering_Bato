@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db_config.php';
+require_once(__DIR__ . '/../triedy/db_config.php');
 
 // Kontrola, či je používateľ prihlásený a má rolu 'reception'
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'reception') {
