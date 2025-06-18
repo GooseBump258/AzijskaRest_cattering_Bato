@@ -1,14 +1,22 @@
 <?php
-// manage_menu.php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+session_start();
+require_once 'db_config.php'; // <--- Uisti sa, že toto existuje a správne nastavuje $pdo
+
+// Kontrola, či je používateľ prihlásený
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
+    header('Location: index.php');
+    exit();
 }
 
-require_once 'db_config.php';
+// Overenie roly z databázy
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch();
 
-// Kontrola admin prístupu
-if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] !== 1) {
-    $_SESSION['error_message'] = "Nemáte oprávnenie pre správu menu.";
+if (!$user || $user['role'] !== 'admin') {
+    $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
     header('Location: index.php');
     exit();
 }
