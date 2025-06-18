@@ -30,14 +30,14 @@ if (isset($_POST['username_email']) && isset($_POST['password'])) {
             if ($user['role'] === 'admin') {
                 header('Location: ../admin_panel.php'); // Admin panel
             } elseif ($user['role'] === 'reception') {
-                header('Location: rezervacie.php'); // Stránka pre recepciu
+                header('Location: ../rezervacie.php'); // Stránka pre recepciu
             } else {
-                header('Location: index.php'); // Bežná domovská stránka pre ostatných používateľov
+                header('Location: ../index.php'); // Bežná domovská stránka pre ostatných používateľov
             }
             exit();
         } else {
             $_SESSION['error_message'] = "Nesprávne používateľské meno/e-mail alebo heslo.";
-            header('Location: index.php'); // Vráti používateľa na prihlasovaciu stránku (alebo index.php)
+            header('Location: ../index.php'); // Vráti používateľa na prihlasovaciu stránku (alebo index.php)
             exit();
         }
     } catch (PDOException $e) {
