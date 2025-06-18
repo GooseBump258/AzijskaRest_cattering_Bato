@@ -4,10 +4,22 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Kontrola, či je používateľ prihlásený A či je administrátor
-if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] !== 1) {
+// Kontrola, či je používateľ prihlásený A či je administrátor (podľa stĺpca 'role' v DB)
+if (!isset($_SESSION['user_id'])) {
     $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
-    header('Location: index.php'); // Presmeruj preč, ak nie je admin
+    header('Location: index.php');
+    exit();
+}
+
+// Overenie roly z databázy
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch();
+
+if (!$user || $user['role'] !== 'admin') {
+    $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
+    header('Location: index.php');
     exit();
 }
 
