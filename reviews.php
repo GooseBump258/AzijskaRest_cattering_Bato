@@ -181,7 +181,7 @@ try {
         </div>
     </section>
 
-     <?php require_once 'triedy/recenzie.html' ?>
+     <?php require_once 'triedy/recenzie.php' ?>
 
     <?php require_once 'parts/footer.html' ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
