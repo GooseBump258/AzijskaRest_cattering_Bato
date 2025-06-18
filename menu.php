@@ -1,151 +1,276 @@
+<?php
+// menu.php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once(__DIR__ . '/triedy/db_config.php');
+
+$menu_items = [];
+try {
+    // Načítanie všetkých položiek menu z databázy
+    $stmt = $pdo->query("SELECT * FROM menu_items ORDER BY category, name");
+    $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $menu_items = [];
+    $_SESSION['error_message'] = "Nastala chyba pri načítaní menu. Prosím, skúste to neskôr.";
+}
+
+// Definujeme iba 3 kategórie: Raňajky, Obed, Večera
+$allowed_categories = ['Raňajky', 'Obed', 'Večera'];
+
+// Zoskupenie položiek podľa kategórie
+$categorized_menu = [
+    'Raňajky' => [],
+    'Obed' => [],
+    'Večera' => []
+];
+
+foreach ($menu_items as $item) {
+    if (in_array($item['category'], $allowed_categories)) {
+        $categorized_menu[$item['category']][] = $item;
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Victory - Naše Menu</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/fontAwesome.css">
+    <link rel="stylesheet" href="css/hero-slider.css">
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
 
+    <link href="https://fonts.googleapis.com/css?family=Spectral:200,300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: #fafafa;
+        .menu-category-section {
+            margin-top: 50px;
+            padding-bottom: 30px;
+        }
+        .menu-category-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.8em;
             color: #333;
         }
-        .menu-wrapper {
-            display: flex;
-            max-width: 1200px;
-            margin: 40px auto;
-            gap: 30px;
-        }
-        .menu-categories {
-            flex: 0 0 180px;
-            border-right: 2px solid #d9534f;
-            padding-right: 20px;
-        }
-        .menu-categories h2 {
-            font-size: 2.5em;
-            color: #d9534f;
-            margin-bottom: 20px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .menu-categories h2.active {
-            font-weight: 700;
-            text-decoration: underline;
-        }
-        .menu-items {
-            flex: 1;
-        }
-        .menu-item {
-            display: flex;
-            gap: 20px;
-            background: white;
+        .food-item {
+            background-color: #fff;
+            border: 1px solid #eee;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             overflow: hidden;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease-in-out;
+            position: relative;
         }
-        .menu-item img {
-            width: 220px;
-            height: 160px;
+        .food-item:hover {
+            transform: translateY(-5px);
+        }
+        .food-item img {
+            width: 100%;
+            height: 350px; /* Veľké obrázky */
             object-fit: cover;
-            flex-shrink: 0;
-            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
         }
-        .menu-item-content {
-            padding: 15px 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .food-item .price {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #d9534f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.2em;
+            z-index: 10;
         }
-        .menu-item-content h3 {
-            margin: 0 0 10px;
+        .food-item .text-content {
+            padding: 15px;
+        }
+        .food-item .text-content h4 {
             font-size: 1.6em;
-            color: #d9534f;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
         }
-        .menu-item-content .price {
-            font-weight: 700;
-            font-size: 1.3em;
-            color: #444;
-        }
-        .menu-item-content p {
-            margin-top: 8px;
-            font-size: 0.95em;
+        .food-item .text-content p {
+            font-size: 1em;
             color: #666;
-            line-height: 1.3;
+            line-height: 1.5;
+        }
+        /* Owl Carousel šípky a bodky */
+        .owl-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .owl-nav button {
+            background: #f7f7f7;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .owl-nav button:hover {
+            background: #eee;
+            color: #333;
+        }
+        .owl-dots {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .owl-dots button.owl-dot {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .owl-dots button.owl-dot.active {
+            background: #d9534f;
         }
     </style>
 </head>
 <body>
+    <?php require_once 'parts/header.html' ?>
 
-<?php require_once 'parts/header.html'; ?>
+    <section class="page-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Naše Menu</h1>
+                    <p>Objavte naše vynikajúce jedlá a nápoje pripravené s láskou a z čerstvých surovín.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="page-heading" style="text-align:center; margin-top:40px;">
-    <h1>Naše Menu</h1>
-    <p>Objavte naše vynikajúce jedlá a nápoje pripravené s láskou a z čerstvých surovín.</p>
-</section>
+    <?php
+    if (isset($_SESSION['error_message'])) {
+        echo '<div class="container"><p class="message error">' . htmlspecialchars($_SESSION['error_message']) . '</p></div>';
+        unset($_SESSION['error_message']);
+    }
+    if (isset($_SESSION['success_message'])) {
+        echo '<div class="container"><p class="message success">' . htmlspecialchars($_SESSION['success_message']) . '</p></div>';
+        unset($_SESSION['success_message']);
+    }
+    ?>
 
-<div class="menu-wrapper">
-    <nav class="menu-categories">
-        <?php
-        $first = true;
-        foreach ($categorized_menu as $category_name => $items_in_category) {
-            echo '<h2' . ($first ? ' class="active"' : '') . ' data-category="' . htmlspecialchars($category_name) . '">' . htmlspecialchars($category_name) . '</h2>';
-            $first = false;
-        }
-        ?>
-    </nav>
+    <?php if (empty($menu_items)): ?>
+        <div class="container text-center" style="padding: 50px 0;">
+            <p>Momentálne nemáme žiadne položky v menu. Skúste nás navštíviť neskôr!</p>
+            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === 1): ?>
+                <p><a href="manage_menu.php" class="btn btn-primary" style="margin-top: 20px;">Pridať položky do menu</a></p>
+            <?php endif; ?>
+        </div>
+    <?php else: ?>
 
-    <div class="menu-items">
-        <?php
-        $first = true;
-        foreach ($categorized_menu as $category_name => $items_in_category) {
-            echo '<div class="category-items" data-category="' . htmlspecialchars($category_name) . '"' . ($first ? '' : ' style="display:none;"') . '>';
-            foreach ($items_in_category as $item) {
-                $image = $item['image_path'] ? htmlspecialchars($item['image_path']) : 'https://via.placeholder.com/220x160?text=Bez+obrázka';
-                $name = htmlspecialchars($item['name']);
-                $price = number_format($item['price'], 2, ',', ' ') . ' €';
-                $desc = htmlspecialchars($item['description']);
-                echo '
-                    <div class="menu-item">
-                        <img src="' . $image . '" alt="' . $name . '">
-                        <div class="menu-item-content">
-                            <h3>' . $name . '</h3>
-                            <div class="price">' . $price . '</div>
-                            <p>' . $desc . '</p>
-                        </div>
-                    </div>
-                ';
+        <?php foreach ($categorized_menu as $category_name => $items_in_category):
+            if (empty($items_in_category)) {
+                continue;
             }
-            echo '</div>';
-            $first = false;
-        }
+            // obrázky kategórií podľa názvu
+            $category_image = '';
+            if ($category_name == 'Raňajky') {
+                $category_image = 'img/breakfast_menu.jpg';
+            } elseif ($category_name == 'Obed') {
+                $category_image = 'img/lunch_menu.jpg';
+            } elseif ($category_name == 'Večera') {
+                $category_image = 'img/dinner_menu.jpg';
+            } else {
+                $category_image = 'https://via.placeholder.com/400x300?text=' . urlencode($category_name);
+            }
         ?>
-    </div>
-</div>
+        <section class="menu-category-section <?php echo strtolower(str_replace(' ', '-', $category_name)); ?>-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2><?php echo htmlspecialchars($category_name); ?></h2>
+                        <img src="<?php echo $category_image; ?>" alt="<?php echo htmlspecialchars($category_name); ?>" style="max-width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 30px;">
+                    </div>
+                </div>
+                <div class="row owl-carousel owl-theme" id="owl-<?php echo strtolower(str_replace(' ', '-', $category_name)); ?>">
+                    <?php foreach ($items_in_category as $item): ?>
+                        <div class="item col-md-12">
+                            <div class="food-item">
+                                <?php if ($item['image_path']): ?>
+                                    <img src="<?php echo htmlspecialchars($item['image_path']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                                <?php else: ?>
+                                    <img src="https://via.placeholder.com/400x350?text=Bez+obrázka" alt="Bez obrázka">
+                                <?php endif; ?>
+                                <div class="price"><?php echo htmlspecialchars(number_format($item['price'], 2, ',', ' ')) . ' €'; ?></div>
+                                <div class="text-content">
+                                    <h4><?php echo htmlspecialchars($item['name']); ?></h4>
+                                    <p><?php echo nl2br(htmlspecialchars($item['description'])); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+        <?php endforeach; ?>
 
-<?php require_once 'parts/footer.html'; ?>
+    <?php endif; ?>
 
-<script>
-    // Prepni zobrazenie kategórie po kliknuti na nadpis v menu
-    document.querySelectorAll('.menu-categories h2').forEach(function(catHeading){
-        catHeading.addEventListener('click', function(){
-            // Odstran aktivny styl zo vsetkych
-            document.querySelectorAll('.menu-categories h2').forEach(h => h.classList.remove('active'));
-            this.classList.add('active');
+    <?php require_once 'rezervacie/rezervacny_formular_original.php'; ?>
+    <?php require_once 'parts/footer.html' ?>
 
-            // Skry vsetky kategorie
-            document.querySelectorAll('.category-items').forEach(div => div.style.display = 'none');
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-            // Ukaz tu spravnu
-            var cat = this.getAttribute('data-category');
-            document.querySelector('.category-items[data-category="' + cat + '"]').style.display = 'block';
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            <?php foreach (array_keys($categorized_menu) as $category): ?>
+                <?php $carousel_id = strtolower(str_replace(' ', '-', $category)); ?>
+                <?php if (!empty($categorized_menu[$category])): ?>
+                    $('#owl-<?php echo $carousel_id; ?>').owlCarousel({
+                        loop:true,
+                        margin:30,
+                        nav:true,
+                        pagination: false,
+                        dots: true,
+                        responsive:{
+                            0:{items:1},
+                            600:{items:2},
+                            1000:{items:3}
+                        }
+                    });
+                <?php endif; ?>
+            <?php endforeach; ?>
         });
-    });
-</script>
 
+        function scrollToID(id, speed){
+            var offSet = 0;
+            var targetOffset = $(id).offset().top - offSet;
+            var mainNav = $('#main-nav');
+            $('html,body').animate({scrollTop:targetOffset}, speed);
+            if (mainNav.hasClass("open")) {
+                mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+                mainNav.removeClass("open");
+            }
+        }
+        if (typeof console === "undefined") {
+            console = { log: function() { } };
+        }
+    </script>
 </body>
 </html>
