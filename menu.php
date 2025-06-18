@@ -12,28 +12,22 @@ try {
     $stmt = $pdo->query("SELECT * FROM menu_items ORDER BY category, name");
     $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC); // Použijeme FETCH_ASSOC pre ľahší prístup k stĺpcom
 } catch (PDOException $e) {
-    // V produkčnom prostredí by si tu mal logovať chybu namiesto jej zobrazovania
-    // error_log("Chyba pri načítaní menu: " . $e->getMessage());
-    // Môžeš zobraziť používateľovi priateľskú správu, alebo prázdne menu
     $menu_items = [];
     $_SESSION['error_message'] = "Nastala chyba pri načítaní menu. Prosím, skúste to neskôr.";
 }
 
 // Zoskupenie položiek podľa kategórie
-// Pre prehľadnosť si vytvoríme pole, kde kľúčom bude kategória
 $categorized_menu = [
     'Predjedlá' => [],
     'Hlavné jedlá' => [],
     'Dezerty' => [],
     'Nápoje' => []
-    // Pridaj sem všetky kategórie, ktoré používaš v databáze a chceš ich zobraziť
 ];
 
 foreach ($menu_items as $item) {
-    if (isset($categorized_menu[$item['category']])) { // Kontrola, či kategória existuje v našom definovanom zozname
+    if (isset($categorized_menu[$item['category']])) {
         $categorized_menu[$item['category']][] = $item;
     } else {
-        // Ak existuje kategória, ktorú si nepreddefinoval, pridaj ju dynamicky
         $categorized_menu[$item['category']][] = $item;
     }
 }
@@ -60,16 +54,18 @@ foreach ($menu_items as $item) {
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <style>
-            /* Základné štýly pre lepšie zobrazenie položiek menu - prispôsob si podľa TEMPLATE */
             .menu-category-section {
                 margin-top: 50px;
                 padding-bottom: 30px;
             }
             .menu-category-section h2 {
-                text-align: center;
+                text-align: left; /* zarovnanie naľavo */
                 margin-bottom: 40px;
-                font-size: 2.8em;
+                font-size: 3.2em; /* väčší nadpis */
                 color: #333;
+                font-weight: 700;
+                border-left: 6px solid #d9534f; /* farebný pruh vľavo pre lepší efekt */
+                padding-left: 15px;
             }
             .food-item {
                 background-color: #fff;
@@ -77,23 +73,26 @@ foreach ($menu_items as $item) {
                 border-radius: 8px;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.05);
                 overflow: hidden;
-                margin-bottom: 20px; /* Priestor medzi kartami */
+                margin-bottom: 20px;
                 transition: transform 0.2s ease-in-out;
+                position: relative;
             }
             .food-item:hover {
                 transform: translateY(-5px);
             }
             .food-item img {
                 width: 100%;
-                height: 250px; /* Zväčšená výška obrázkov pre väčšie jedlá */
-                object-fit: cover; /* Zabezpečí, že obrázok pokryje plochu bez deformácie */
+                height: auto; /* obrazok nebude orezany, zachova proporcie */
+                max-height: 250px; /* maximalna vyska pre jednotny rozmer */
+                object-fit: contain; /* obrazok sa prispôsobí celej ploche bez orezania */
+                background-color: #f9f9f9; /* jemne pozadie, ak je obrazok mensi */
                 border-bottom: 1px solid #eee;
             }
             .food-item .price {
                 position: absolute;
                 top: 10px;
                 right: 10px;
-                background-color: #d9534f; /* Červená farba ako v pôvodnom template */
+                background-color: #d9534f;
                 color: white;
                 padding: 5px 10px;
                 border-radius: 5px;
@@ -115,7 +114,6 @@ foreach ($menu_items as $item) {
                 color: #666;
                 line-height: 1.5;
             }
-            /* Úpravy pre OWL Carousel šípky a bodky */
             .owl-nav {
                 margin-top: 20px;
                 text-align: center;
@@ -147,7 +145,7 @@ foreach ($menu_items as $item) {
                 transition: all 0.3s ease;
             }
             .owl-dots button.owl-dot.active {
-                background: #d9534f; /* Aktívna bodka */
+                background: #d9534f;
             }
         </style>
     </head>
@@ -166,7 +164,6 @@ foreach ($menu_items as $item) {
     </section>
 
     <?php
-    // Zobrazenie chybových a úspešných správ (napr. z admin panelu alebo ak databáza zlyhá)
     if (isset($_SESSION['error_message'])) {
         echo '<div class="container"><p class="message error">' . htmlspecialchars($_SESSION['error_message']) . '</p></div>';
         unset($_SESSION['error_message']);
@@ -187,10 +184,9 @@ foreach ($menu_items as $item) {
     <?php else: ?>
 
         <?php
-        // Iterujeme cez zoskupené kategórie a generujeme sekcie s Owl Carouselom
         foreach ($categorized_menu as $category_name => $items_in_category):
             if (empty($items_in_category)) {
-                continue; // Preskočíme prázdne kategórie
+                continue;
             }
         ?>
         <section class="menu-category-section <?php echo strtolower(str_replace(' ', '-', $category_name)); ?>-menu">
@@ -247,9 +243,7 @@ foreach ($menu_items as $item) {
 
     <?php endif; ?>
 
-
     <?php require_once 'rezervacie/rezervacny_formular_original.php'; ?>
-
 
     <?php require_once 'parts/footer.html' ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -262,50 +256,39 @@ foreach ($menu_items as $item) {
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // navigation click actions
             $('.scroll-link').on('click', function(event){
                 event.preventDefault();
                 var sectionID = $(this).attr("data-id");
                 scrollToID('#' + sectionID, 750);
             });
-            // scroll to top action
             $('.scroll-top').on('click', function(event) {
                 event.preventDefault();
                 $('html, body').animate({scrollTop:0}, 'slow');
             });
-            // mobile nav toggle
             $('#nav-toggle').on('click', function (event) {
                 event.preventDefault();
                 $('#main-nav').toggleClass("open");
             });
 
-            // Inicializácia Owl Carousel pre každú kategóriu
             <?php foreach (array_keys($categorized_menu) as $category): ?>
                 <?php $carousel_id = strtolower(str_replace(' ', '-', $category)); ?>
-                <?php if (!empty($categorized_menu[$category])): // Inicializuj len ak sú položky v kategórii ?>
+                <?php if (!empty($categorized_menu[$category])): ?>
                     $('#owl-<?php echo $carousel_id; ?>').owlCarousel({
                         loop:true,
-                        margin:30, /* Zväčšená medzera medzi položkami */
+                        margin:30,
                         nav:true,
                         pagination: false,
                         dots: true,
                         responsive:{
-                            0:{
-                                items:1
-                            },
-                            600:{
-                                items:2
-                            },
-                            1000:{
-                                items:4 /* Zmenené na 4 položky pre väčšie obrazovky */
-                            }
+                            0:{items:1},
+                            600:{items:2},
+                            1000:{items:4}
                         }
                     });
                 <?php endif; ?>
             <?php endforeach; ?>
         });
 
-        // scroll function
         function scrollToID(id, speed){
             var offSet = 0;
             var targetOffset = $(id).offset().top - offSet;
@@ -317,9 +300,7 @@ foreach ($menu_items as $item) {
             }
         }
         if (typeof console === "undefined") {
-            console = {
-                log: function() { }
-            };
+            console = { log: function() { } };
         }
     </script>
 </body>
