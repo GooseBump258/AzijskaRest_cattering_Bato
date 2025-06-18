@@ -27,13 +27,13 @@
                                     <fieldset>
                                         <select required name='day' onchange='this.form.()'>
                                             <option value="">Vyberte si deň</option>
-                                            <option value="2025-06-16">Pondelok (16.6.2025)</option>
-                                            <option value="2025-06-17">Utorok (17.6.2025)</option>
-                                            <option value="2025-06-18">Streda (18.6.2025)</option>
-                                            <option value="2025-06-19">Štvrtok (19.6.2025)</option>
-                                            <option value="2025-06-20">Piatok (20.6.2025)</option>
-                                            <option value="2025-06-21">Sobota (21.6.2025)</option>
-                                            <option value="2025-06-22">Nedeľa (22.6.2025)</option>
+                                            <option value="2025-16-06">Pondelok (16.6.2025)</option>
+                                            <option value="2025-17-06">Utorok (17.6.2025)</option>
+                                            <option value="2025-18-06">Streda (18.6.2025)</option>
+                                            <option value="2025-19-06">Štvrtok (19.6.2025)</option>
+                                            <option value="2025-20-06">Piatok (20.6.2025)</option>
+                                            <option value="2025-21-06">Sobota (21.6.2025)</option>
+                                            <option value="2025-22-06">Nedeľa (22.6.2025)</option>
                                         </select>
                                     </fieldset>
                                 </div>
