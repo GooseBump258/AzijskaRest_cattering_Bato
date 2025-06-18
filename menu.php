@@ -67,103 +67,54 @@ foreach ($menu_items as $item) {
                 border-left: 6px solid #d9534f; /* farebný pruh vľavo pre lepší efekt */
                 padding-left: 15px;
             }
-            /* Kontajner pre food-itemy, ktorý použije CSS Grid */
-.food-items-container {
-    display: grid;
-    /* Na väčších obrazovkách 4 stĺpce, každý zaberie 1fr (rovnaký podiel z dostupného miesta) */
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px; /* Medzera medzi položkami */
-    padding: 20px; /* Vnútorné odsadenie kontajnera */
-    box-sizing: border-box; /* Zabezpečí, že padding a border sú zahrnuté vo vypočítanej šírke/výške */
-}
-
-/* Responsívne úpravy pre menšie obrazovky */
-@media (max-width: 1200px) {
-    .food-items-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 stĺpce na stredných obrazovkách */
-    }
-}
-
-@media (max-width: 768px) {
-    .food-items-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 stĺpce na tabletoch */
-    }
-}
-
-@media (max-width: 480px) {
-    .food-items-container {
-        grid-template-columns: 1fr; /* 1 stĺpec na mobiloch */
-    }
-}
-
-.food-item {
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-    position: relative; /* Pre poziciovanie ceny */
-    display: flex; /* Použijeme flexbox vo vnútri pre rozloženie obrázku a textu */
-    flex-direction: column; /* Položky pod sebou */
-}
-
-.food-item:hover {
-    transform: translateY(-5px);
-}
-
-.food-item .image-wrapper { /* Nový obal pre obrázok */
-    width: 100%;
-    height: 200px; /* Pevná výška pre obrázkový rámček */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #eee;
-}
-
-.food-item img {
-    max-width: 100%; /* Obrazok sa prisposobí šírke rámčeka */
-    max-height: 100%; /* Obrazok sa prisposobí výške rámčeka */
-    object-fit: contain; /* Obrazok sa prispôsobí celej ploche bez orezania */
-    display: block; /* Odstráni prípadné medzery pod obrázkom */
-}
-
-.food-item .price {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #d9534f;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 20px;
-    z-index: 10;
-}
-
-.food-item .text-content {
-    padding: 15px; /* Zmenšené odsadenie */
-    flex-grow: 1; /* Zabezpečí, že text-content zaberie zvyšný priestor */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.food-item .text-content h4 {
-    font-size: 1.1em; /* Trochu menší nadpis */
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-.food-item .text-content p {
-    font-size: 0.85em; /* Trochu menší text popisu */
-    color: #666;
-    line-height: 1.4;
-    margin-bottom: 10px; /* Pridaná medzera pod popisom */
-}
+            .food-item {
+                background-color: #fff;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                overflow: hidden;
+                margin-bottom: 20px;
+                transition: transform 0.2s ease-in-out;
+                position: relative;
+            }
+            .food-item:hover {
+                transform: translateY(-5px);
+            }
+            .food-item img {
+                width: 100%;
+                
+                max-height: 250px; /* maximalna vyska pre jednotny rozmer */
+                max-width: 250px;
+                object-fit: contain; /* obrazok sa prispôsobí celej ploche bez orezania */
+                background-color: #f9f9f9; /* jemne pozadie, ak je obrazok mensi */
+                border-bottom: 1px solid #eee;
+            }
+            .food-item .price {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: #d9534f;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 20px;
+                z-index: 10;
+            }
+            .food-item .text-content {
+                padding: 50px;
+            }
+            .food-item .text-content h4 {
+                font-size: 20px;
+                margin-top: 0;
+                margin-bottom: 8px;
+                color: #333;
+            }
+            .food-item .text-content p {
+                font-size: 0.9em;
+                color: #666;
+                line-height: 1.5;
+            }
             .owl-nav {
                 margin-top: 20px;
                 text-align: center;
