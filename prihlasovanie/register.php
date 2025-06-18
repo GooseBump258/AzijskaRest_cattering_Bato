@@ -48,7 +48,7 @@ if (isset($_POST['register_submit'])) {
                 $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
                 if ($stmt->execute(['username' => $username, 'email' => $email, 'password' => $hashed_password])) {
                     $_SESSION['registration_success'] = "Registrácia bola úspešná! Teraz sa môžete prihlásiť.";
-                    header('Location: index.php');
+                    header('Location: ../index.php');
                     exit();
                 } else {
                     $errors[] = "Chyba pri ukladaní používateľa do databázy.";
