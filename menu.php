@@ -130,21 +130,6 @@ foreach ($menu_items as $item) {
     text-align: right;
 }
 
-
-            .food-item .text-content {
-                padding: 50px;
-            }
-            .food-item .text-content h4 {
-                font-size: 20px;
-                margin-top: 0;
-                margin-bottom: 8px;
-                color: #333;
-            }
-            .food-item .text-content p {
-                font-size: 0.9em;
-                color: #666;
-                line-height: 1.5;
-            }
             .owl-nav {
                 margin-top: 20px;
                 text-align: center;
