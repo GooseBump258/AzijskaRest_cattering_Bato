@@ -1,8 +1,8 @@
 <?php
-// rezervacny_formular_original.php
-// Tento súbor obsahuje presne pôvodný HTML formulár pre rezerváciu stola, bez akýchkoľvek úprav.
-// Môžeš ho vkladať na akúkoľvek stránku pomocou include 'rezervacny_formular_original.php';
+require_once 'triedy/db_config.php';
 ?>
+
+
 
 <form id="form-submit" action="triedy/rezervuj.php" method="post">
     <section id="book-table">
