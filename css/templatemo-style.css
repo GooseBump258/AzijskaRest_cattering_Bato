@@ -341,16 +341,16 @@ section#book-table .left-image img {
 }
 
 .right-info select {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	box-shadow: none;
+	outline: none;
 	border-right: none;
 	border-left: none;
 	border-top: none;
-	width: 100%;
-	outline: none;
-	border-bottom: 1px solid #eee;	
+	border-bottom: 1px solid #eee;
 	font-size: 14px;
 	color: #9a9a9a;
-	padding-left: 10px;
-	height: 40px;
 }
 
 .right-info input {
