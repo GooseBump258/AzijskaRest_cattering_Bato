@@ -23,20 +23,34 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <fieldset>
-                                    <input type="date" name="date" class="form-control" required>
+                                    <select required name="day">
+                                        <option value="">Vyberte si deň</option>
+                                        <option value="Pondelok">Pondelok</option>
+                                        <option value="Utorok">Utorok</option>
+                                        <option value="Streda">Streda</option>
+                                        <option value="Štvrtok">Štvrtok</option>
+                                        <option value="Piatok">Piatok</option>
+                                        <option value="Sobota">Sobota</option>
+                                        <option value="Nedeľa">Nedeľa</option>
+                                    </select>
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
-                                    <select required name="hour" class="form-control">
+                                    <input type="date" name="datum_rezervacie" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <select required name="hour">
                                         <option value="">Vyberte si hodinu</option>
-                                        <option value="10-00">10:00</option>
-                                        <option value="12-00">12:00</option>
-                                        <option value="14-00">14:00</option>
-                                        <option value="16-00">16:00</option>
-                                        <option value="18-00">18:00</option>
-                                        <option value="20-00">20:00</option>
-                                        <option value="22-00">22:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="22:00">22:00</option>
                                     </select>
                                 </fieldset>
                             </div>
@@ -47,12 +61,12 @@
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
-                                    <input name="phone" type="tel" class="form-control" placeholder="Telefónne číslo" required>
+                                    <input name="phone" type="text" class="form-control" placeholder="Telefónne číslo" required>
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
-                                    <select required class="form-control" name="persons">
+                                    <select required name="persons">
                                         <option value="">Koľko ľudí?</option>
                                         <option value="1-osoba">1</option>
                                         <option value="2-osoby">2</option>
@@ -63,7 +77,7 @@
                                     </select>
                                 </fieldset>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <fieldset>
                                     <button type="submit" class="btn">Booknite si stôl</button>
                                 </fieldset>

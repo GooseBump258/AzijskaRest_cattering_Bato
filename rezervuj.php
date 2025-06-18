@@ -2,36 +2,27 @@
 session_start();
 require_once 'db_config.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Získanie dát z POST formulára
-    $datum = isset($_POST['date']) ? $_POST['date'] : '';
-    $hodina = isset($_POST['hour']) ? $_POST['hour'] : '';
-    $meno = isset($_POST['name']) ? $_POST['name'] : '';
-    $telefon = isset($_POST['phone']) ? $_POST['phone'] : '';
-    $osoby = isset($_POST['persons']) ? $_POST['persons'] : '';
-
-    // Validácia
-    if (empty($datum) || empty($hodina) || empty($meno) || empty($telefon) || empty($osoby)) {
-        $_SESSION['error_message'] = 'Prosím, vyplňte všetky polia.';
-        header('Location: index.php');
-        exit();
-    }
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $den = $_POST['day'];
+    $datum_rezervacie = $_POST['datum_rezervacie'];
+    $hodina = $_POST['hour'];
+    $meno = $_POST['name'];
+    $telefon = $_POST['phone'];
+    $osoby = $_POST['persons'];
+    $vytvorene = date("Y-m-d H:i:s"); // pre stĺpec "datum"
 
     try {
-        // Pridanie rezervácie do databázy
-        $stmt = $pdo->prepare("INSERT INTO rezervacie (datum, hodina, meno, telefon, osoby) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$datum, $hodina, $meno, $telefon, $osoby]);
+        $stmt = $pdo->prepare("INSERT INTO rezervacie (den, datum_rezervacie, hodina, meno, telefon, osoby, datum) 
+                               VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$den, $datum_rezervacie, $hodina, $meno, $telefon, $osoby, $vytvorene]);
 
-        $_SESSION['success_message'] = 'Rezervácia bola úspešne odoslaná!';
-        header('Location: index.php');
+        $_SESSION['success_message'] = "Rezervácia bola úspešne vytvorená.";
+        header('Location: dakujeme.php');
         exit();
     } catch (PDOException $e) {
-        $_SESSION['error_message'] = 'Chyba pri ukladaní rezervácie: ' . $e->getMessage();
-        header('Location: index.php');
+        $_SESSION['error_message'] = "Chyba pri ukladaní rezervácie: " . $e->getMessage();
+        header('Location: chyba.php');
         exit();
     }
-} else {
-    $_SESSION['error_message'] = 'Neplatný prístup.';
-    header('Location: index.php');
-    exit();
 }
+?>
