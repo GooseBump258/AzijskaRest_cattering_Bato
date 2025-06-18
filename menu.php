@@ -195,23 +195,7 @@ foreach ($menu_items as $item) {
                     <div class="col-md-10 col-md-offset-1">
                         <div class="menu-content">
                             <div class="row">
-                                <div class="col-md-5 <?php echo (strtolower(str_replace(' ', '-', $category_name)) == 'lunch') ? '' : 'hidden-xs hidden-sm'; ?>">
-                                    <div class="left-image">
-                                        <?php
-                                            $category_image = '';
-                                            if (strtolower(str_replace(' ', '-', $category_name)) == 'predjedla') {
-                                                $category_image = 'img/breakfast_menu.jpg';
-                                            } elseif (strtolower(str_replace(' ', '-', $category_name)) == 'hlavne-jedla') {
-                                                $category_image = 'img/lunch_menu.jpg';
-                                            } elseif (strtolower(str_replace(' ', '-', $category_name)) == 'dezerty') {
-                                                $category_image = 'img/dinner_menu.jpg';
-                                            } else {
-                                                $category_image = 'https://via.placeholder.com/400x300?text=' . urlencode($category_name);
-                                            }
-                                        ?>
-                                        <img src="<?php echo $category_image; ?>" alt="<?php echo htmlspecialchars($category_name); ?>">
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-7 <?php echo (strtolower(str_replace(' ', '-', $category_name)) == 'lunch') ? 'col-md-offset-5' : ''; ?>">
                                     <h2><?php echo htmlspecialchars($category_name); ?> Menu</h2>
                                     <div id="owl-<?php echo strtolower(str_replace(' ', '-', $category_name)); ?>" class="owl-carousel owl-theme">
