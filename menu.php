@@ -101,10 +101,10 @@ foreach ($menu_items as $item) {
                 z-index: 10;
             }
             .food-item .text-content {
-                padding: 15px;
+                padding: 50px;
             }
             .food-item .text-content h4 {
-                font-size: 1.4em;
+                font-size: 20px;
                 margin-top: 0;
                 margin-bottom: 8px;
                 color: #333;
