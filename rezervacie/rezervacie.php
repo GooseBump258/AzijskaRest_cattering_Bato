@@ -189,7 +189,7 @@ try {
         </div>
     </div>
 
-    <?php require_once 'parts/footer.html' ?>
+    <?php require_once '../parts/footer.html' ?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
