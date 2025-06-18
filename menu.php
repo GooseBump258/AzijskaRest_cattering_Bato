@@ -68,39 +68,73 @@ foreach ($menu_items as $item) {
                 padding-left: 15px;
             }
             .food-item {
-                background-color: #fff;
-                border: 1px solid #eee;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                overflow: hidden;
-                margin-bottom: 20px;
-                transition: transform 0.2s ease-in-out;
-                position: relative;
-            }
-            .food-item:hover {
-                transform: translateY(-5px);
-            }
-            .food-item img {
-                width: 100%;
-                
-                max-height: 250px; /* maximalna vyska pre jednotny rozmer */
-                max-width: 250px;
-                object-fit: contain; /* obrazok sa prispôsobí celej ploche bez orezania */
-                background-color: #f9f9f9; /* jemne pozadie, ak je obrazok mensi */
-                border-bottom: 1px solid #eee;
-            }
-            .food-item .price {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background-color: #d9534f;
-                color: white;
-                padding: 5px 10px;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 20px;
-                z-index: 10;
-            }
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 25px;
+    display: flex;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.food-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.food-item img {
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background-color: #f0f0f0;
+}
+
+.food-item .price {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    z-index: 20;
+}
+
+.food-item .text-content {
+    padding: 20px 30px;
+    flex: 1;
+    position: relative;
+}
+
+.food-item .text-content h4 {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #222;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.food-item .text-content p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Aby cena nebola mimo obrázku, upravíme pozíciu na text-content */
+.food-item .price {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
             .food-item .text-content {
                 padding: 50px;
             }
