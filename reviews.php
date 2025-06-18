@@ -215,7 +215,7 @@ try {
                             </form>
                         </div>
                     <?php else: ?>
-                        <p class="message error">Pre pridanie recenzie sa musíte <a href="#" id="login-button-for-review">prihlásiť</a> alebo <a href="register.php">zaregistrovať</a>.</p>
+                        <p class="message error">Pre pridanie recenzie sa musíte <a href="#" id="login-button-for-review">prihlásiť</a> alebo <a href="prihlasovanie/register.php">zaregistrovať</a>.</p>
                     <?php endif; ?>
 
                     <h3>Existujúce recenzie</h3>
