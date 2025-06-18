@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Načítanie konfiguračného súboru pre pripojenie k databáze
-require_once 'db_config.php';
+require_once(__DIR__ . '/../triedy/db_config.php');
 
 // Spracovanie formulára po jeho odoslaní
 if (isset($_POST['register_submit'])) {

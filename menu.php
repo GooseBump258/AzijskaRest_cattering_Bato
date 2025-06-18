@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once 'db_config.php';
+require_once(__DIR__ . '/../triedy/db_config.php');
 
 $menu_items = [];
 try {

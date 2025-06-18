@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db_config.php'; // <--- Uisti sa, že toto existuje a správne nastavuje $pdo
+require_once(__DIR__ . '/../triedy/db_config.php'); // <--- Uisti sa, že toto existuje a správne nastavuje $pdo
 
 // Kontrola, či je používateľ prihlásený
 if (!isset($_SESSION['user_id'])) {
