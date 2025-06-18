@@ -4,7 +4,7 @@
 // Môžeš ho vkladať na akúkoľvek stránku pomocou include 'rezervacny_formular_original.php';
 ?>
 
-<form id="form-submit" action="rezervuj.php" method="post">
+<form id="form-submit" action="triedy/rezervuj.php" method="post">
     <section id="book-table">
         <div class="container">
             <div class="row">
