@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert(`$message`);
-            window.location.href = '__DIR__ . '/../index.php'';  // presmerovanie späť na formulár
+            window.location.href = '../index.php';
         </script>";
         exit();
 
