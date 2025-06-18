@@ -180,7 +180,7 @@ if (isset($_POST['register_submit'])) {
         <button type="submit" name="register_submit">Registrovať sa</button>
     </form>
 
-    <p class="login-link">Už máte účet? <a href="index.php" id="login-link">Prihláste sa tu</a>.</p>
+    <p class="login-link">Už máte účet? <a href="../index.php" id="login-link">Prihláste sa tu</a>.</p>
 </div>
 
 </body>
