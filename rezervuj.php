@@ -1,37 +1,37 @@
 <?php
-$servername = "localhost";
-$username = "root";       // zmeň podľa potreby
-$password = "";           // zmeň podľa potreby
-$dbname = "restauracia_projekt";
+session_start();
+require_once 'db_config.php';
 
-// pripojenie k databáze
-$conn = new mysqli($servername, $username, $password, $dbname);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Získanie dát z POST formulára
+    $datum = isset($_POST['date']) ? $_POST['date'] : '';
+    $hodina = isset($_POST['hour']) ? $_POST['hour'] : '';
+    $meno = isset($_POST['name']) ? $_POST['name'] : '';
+    $telefon = isset($_POST['phone']) ? $_POST['phone'] : '';
+    $osoby = isset($_POST['persons']) ? $_POST['persons'] : '';
 
-// kontrola pripojenia
-if ($conn->connect_error) {
-    die("Chyba pripojenia: " . $conn->connect_error);
-}
+    // Validácia
+    if (empty($datum) || empty($hodina) || empty($meno) || empty($telefon) || empty($osoby)) {
+        $_SESSION['error_message'] = 'Prosím, vyplňte všetky polia.';
+        header('Location: index.php');
+        exit();
+    }
 
-// ziskanie údajov z formulára
-$den = $_POST['day'];
-$hodina = $_POST['hour'];
-$meno = $_POST['name'];
-$telefon = $_POST['phone'];
-$osoby = $_POST['persons'];
+    try {
+        // Pridanie rezervácie do databázy
+        $stmt = $pdo->prepare("INSERT INTO rezervacie (datum, hodina, meno, telefon, osoby) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$datum, $hodina, $meno, $telefon, $osoby]);
 
-// SQL dotaz
-$sql = "INSERT INTO rezervacie (den, hodina, meno, telefon, osoby)
-        VALUES ('$den', '$hodina', '$meno', '$telefon', '$osoby')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "<script>
-        alert('Rezervácia bola úspešná!\\nMeno: $meno\\nTelefón: $telefon\\nDeň: $den\\nHodina: $hodina\\nPočet osôb: $osoby');
-        window.location.href = 'index.php';
-        </script>";
+        $_SESSION['success_message'] = 'Rezervácia bola úspešne odoslaná!';
+        header('Location: index.php');
+        exit();
+    } catch (PDOException $e) {
+        $_SESSION['error_message'] = 'Chyba pri ukladaní rezervácie: ' . $e->getMessage();
+        header('Location: index.php');
+        exit();
+    }
 } else {
-    echo "Chyba: " . $sql . "<br>" . $conn->error;
+    $_SESSION['error_message'] = 'Neplatný prístup.';
+    header('Location: index.php');
+    exit();
 }
-
-$conn->close();
-?>
-
