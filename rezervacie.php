@@ -1,10 +1,8 @@
 <?php
-// rezervacie.php
 session_start();
 require_once 'db_config.php';
 
 // Kontrola, či je používateľ prihlásený a má rolu 'reception'
-// Ak chceš, aby k tomu mal prístup aj 'admin', môžeš pridať || $_SESSION['user_role'] === 'admin'
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'reception') {
     $_SESSION['error_message'] = 'Nemáte oprávnenie pre prístup k tejto stránke. Prihláste sa ako recepcia.';
     header('Location: login.php');
@@ -14,14 +12,24 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'reception') {
 $rezervacie = [];
 $error_message = '';
 
+// Spracovanie požiadavky na vymazanie rezervácie
+if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
+    $id = $_GET['delete'];
+    try {
+        $stmt = $pdo->prepare("DELETE FROM rezervacie WHERE id = ?");
+        $stmt->execute([$id]);
+        header("Location: rezervacie.php");
+        exit();
+    } catch (PDOException $e) {
+        $error_message = 'Chyba pri mazaní rezervácie: ' . $e->getMessage();
+    }
+}
+
 try {
-    // Načítanie všetkých rezervácií z tabuľky 'rezervacie'
-    // Zoradené podľa dátumu (najnovšie prvé) a času
     $stmt = $pdo->query("SELECT id, den, hodina, meno, osoby, telefon, datum FROM rezervacie ORDER BY datum DESC, hodina DESC");
     $rezervacie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error_message = 'Chyba pri načítaní rezervácií: ' . $e->getMessage();
-    // V produkčnom prostredí by si mal logovať chybu: error_log("Reservation fetch error: " . $e->getMessage());
 }
 ?>
 
@@ -35,7 +43,6 @@ try {
     <link rel="stylesheet" href="css/fontAwesome.css">
     <link rel="stylesheet" href="css/templatemo-style.css">
     <style>
-        /* Základné štýly prevzaté z tvojho template pre konzistentný vzhľad */
         .page-heading {
             background-color: #f7f7f7;
             padding: 50px 0;
@@ -56,7 +63,7 @@ try {
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            overflow-x: auto; /* Pre responzívnosť tabuľky */
+            overflow-x: auto;
             margin-bottom: 30px;
         }
         table {
@@ -69,7 +76,7 @@ try {
             padding: 12px;
             text-align: left;
             vertical-align: top;
-            white-space: nowrap; /* Zabráni zalamovaniu textu v bunkách tabuľky */
+            white-space: nowrap;
         }
         table th {
             background-color: #f2f2f2;
@@ -91,7 +98,7 @@ try {
             margin-bottom: 20px;
         }
         .btn-logout {
-            background-color: #d9534f; /* Použi farbu z template, napr. červenú */
+            background-color: #d9534f;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -105,6 +112,18 @@ try {
             color: white;
             text-decoration: none;
         }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +134,7 @@ try {
             <div class="row">
                 <div class="col-md-12">
                     <h1>Správa Rezervácií</h1>
-                    <p>Vitajte, **<?php echo htmlspecialchars($_SESSION['username']); ?>**! Tu nájdete prehľad všetkých prijatých rezervácií.</p>
+                    <p>Vitajte, <?php echo htmlspecialchars($_SESSION['username']); ?>  prehľad všetkých prijatých rezervácií nižšie.</p>
                 </div>
             </div>
         </div>
@@ -142,8 +161,7 @@ try {
                             <th>Tel. číslo</th>
                             <th>Počet osôb</th>
                             <th>Vytvorené</th>
-                            
-                            
+                            <th>Akcia</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,7 +174,9 @@ try {
                                 <td><?php echo htmlspecialchars($rez['telefon']); ?></td>
                                 <td><?php echo htmlspecialchars($rez['osoby']); ?></td>
                                 <td><?php echo htmlspecialchars($rez['datum']); ?></td>
-                                
+                                <td>
+                                    <a href="rezervacie.php?delete=<?php echo $rez['id']; ?>" class="btn-delete" onclick="return confirm('Naozaj chcete zmazať túto rezerváciu?');">Zmazať</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
