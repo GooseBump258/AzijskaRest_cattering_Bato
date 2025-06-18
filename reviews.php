@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once(__DIR__ . '/../triedy/db_config.php'); // Pripojenie k databáze
+require_once(__DIR__ . '/triedy/db_config.php'); // Pripojenie k databáze
 
 // Skontroluj, či je používateľ prihlásený
 $is_logged_in = isset($_SESSION['user_id']);
