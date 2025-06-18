@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert(`$message`);
-            window.location.href = 'index.php';  // presmerovanie späť na formulár
+            window.location.href = '/index.php';  // presmerovanie späť na formulár
         </script>";
         exit();
 
