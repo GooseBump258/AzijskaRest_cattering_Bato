@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . '/triedy/db_config.php');
+require_once(__DIR__ . '/../triedy/db_config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $den = isset($_POST['day']) ? $_POST['day'] : '';
