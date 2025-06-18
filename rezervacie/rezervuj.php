@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../triedy/db_config.php');
-
+require_once(__DIR__ . '/triedy/db_config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $den = isset($_POST['day']) ? $_POST['day'] : '';
@@ -16,6 +15,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
+        // Spočítame počet rezervácií na daný deň a hodinu
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM rezervacie WHERE den = ? AND hodina = ?");
+        $stmt->execute([$den, $hodina]);
+        $pocetRezervacii = $stmt->fetchColumn();
+
+        if ($pocetRezervacii >= 5) {
+            // Dni týždňa v poradí (ak máš iný formát, uprav)
+            $dni = ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa'];
+
+            // Nájdeme index zvoleného dňa
+            $indexDna = array_search($den, $dni);
+
+            // Vypočítame ďalšie dostupné dni (napr. ďalších 7 dní po vybranom)
+            $dostupneDni = [];
+            for ($i = 1; $i <= 7; $i++) {
+                $idx = ($indexDna + $i) % count($dni);
+                $dostupneDni[] = $dni[$idx];
+            }
+
+            $dostupneDniStr = implode(", ", $dostupneDni);
+
+            echo "<script>
+                alert('Je nám to ľúto, ale na deň $den o $hodina už nie je možná žiadna rezervácia.\\n'
+                    + 'Ďalšie dostupné dni na rezerváciu sú: $dostupneDniStr');
+                window.history.back();
+            </script>";
+            exit();
+        }
+
+        // Ak je miesto, vložíme rezerváciu
         $stmt = $pdo->prepare("INSERT INTO rezervacie (den, hodina, meno, telefon, osoby) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$den, $hodina, $meno, $telefon, $osoby]);
 
