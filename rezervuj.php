@@ -3,32 +3,36 @@ session_start();
 require_once 'db_config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $datum_rezervacie = $_POST['datum_rezervacie'];
-    $hodina = $_POST['hour'];
-    $meno = trim($_POST['name']);
-    $telefon = trim($_POST['phone']);
-    $osoby = $_POST['persons'];
+    // Získanie dát z POST formulára
+    $den = isset($_POST['day']) ? $_POST['day'] : '';
+    $hodina = isset($_POST['hour']) ? $_POST['hour'] : '';
+    $meno = isset($_POST['name']) ? $_POST['name'] : '';
+    $telefon = isset($_POST['phone']) ? $_POST['phone'] : '';
+    $osoby = isset($_POST['persons']) ? $_POST['persons'] : '';
 
-    // Jednoduchá základná validácia
-    if (!$datum_rezervacie || !$hodina || !$meno || !$telefon || !$osoby) {
-        $_SESSION['error_message'] = "Prosím vyplňte všetky povinné polia.";
-        header('Location: rezervacny_formular.php');
+    // Validácia
+    if (empty($den) || empty($hodina) || empty($meno) || empty($telefon) || empty($osoby)) {
+        $_SESSION['error_message'] = 'Prosím, vyplňte všetky polia.';
+        header('Location: index.php');
         exit();
     }
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO rezervacie (datum_rezervacie, hodina, meno, telefon, osoby) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$datum_rezervacie, $hodina, $meno, $telefon, $osoby]);
+        // Pridanie rezervácie do databázy
+        $stmt = $pdo->prepare("INSERT INTO rezervacie (den, hodina, meno, telefon, osoby) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$den, $hodina, $meno, $telefon, $osoby]);
 
-        $_SESSION['success_message'] = "Rezervácia bola úspešne vytvorená.";
-        header('Location: rezervacny_formular.php');
+        $_SESSION['success_message'] = 'Rezervácia bola úspešne odoslaná!';
+        header('Location: index.php');
         exit();
     } catch (PDOException $e) {
-        $_SESSION['error_message'] = "Chyba pri uložení rezervácie: " . $e->getMessage();
-        header('Location: rezervacny_formular.php');
+        $_SESSION['error_message'] = 'Chyba pri ukladaní rezervácie: ' . $e->getMessage();
+        header('Location: index.php');
         exit();
     }
 } else {
-    header('Location: rezervacny_formular.php');
+    $_SESSION['error_message'] = 'Neplatný prístup.';
+    header('Location: index.php');
     exit();
 }
+
