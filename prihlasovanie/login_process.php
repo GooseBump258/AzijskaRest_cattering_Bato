@@ -28,7 +28,7 @@ if (isset($_POST['username_email']) && isset($_POST['password'])) {
 
             // Presmerovanie na základe roly
             if ($user['role'] === 'admin') {
-                header('Location: admin_panel.php'); // Admin panel
+                header('Location: ../admin_panel.php'); // Admin panel
             } elseif ($user['role'] === 'reception') {
                 header('Location: rezervacie.php'); // Stránka pre recepciu
             } else {
