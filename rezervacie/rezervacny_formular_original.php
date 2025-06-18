@@ -1,6 +1,7 @@
 <?php
 // rezervacny_formular_original.php
-// Tento súbor obsahuje presne HTML formulár pre rezerváciu stola, s ručným zadávaním dátumu.
+// Tento súbor obsahuje presne pôvodný HTML formulár pre rezerváciu stola, bez akýchkoľvek úprav.
+// Môžeš ho vkladať na akúkoľvek stránku pomocou include 'rezervacny_formular_original.php';
 ?>
 
 <form id="form-submit" action="rezervuj.php" method="post">
@@ -20,23 +21,25 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="right-info">
                         <h4>Rezervácia</h4>
-                        
-                <div>
-                    <select required name="day">
-                        <option value="">Vyberte si deň</option>
-                        <option value="Pondelok">Pondelok</option>
-                        <option value="Utorok">Utorok</option>
-                        <option value="Streda">Streda</option>
-                        <option value="Štvrtok">Štvrtok</option>
-                        <option value="Piatok">Piatok</option>
-                        <option value="Sobota">Sobota</option>
-                        <option value="Nedeľa">Nedeľa</option>
-                    </select>
-                </div>
+                        <form id="form-submit" action="" method="get">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <select required name='day' onchange='this.form.()'>
+                                            <option value="">Vyberte si deň</option>
+                                            <option value="Pondelok">Pondelok</option>
+                                            <option value="Utorok">Utorok</option>
+                                            <option value="Streda">Streda</option>
+                                            <option value="Štvrtok">Štvrtok</option>
+                                            <option value="Piatok">Piatok</option>
+                                            <option value="Sobota">Sobota</option>
+                                            <option value="Nedeľa">Nedeľa</option>
+                                        </select>
+                                    </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <select required name='hour' onchange='this.form.submit()'>
+                                        <select required name='hour' onchange='this.form.()'>
                                             <option value="">Vyberte si hodinu</option>
                                             <option value="10-00">10:00</option>
                                             <option value="12-00">12:00</option>
@@ -50,17 +53,17 @@
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input name="name" type="text" class="form-control" id="name" placeholder="Meno a priezvisko" required>
+                                        <input name="name" type="name" class="form-control" id="name" placeholder="Meno a priezvisko" required="">
                                     </fieldset> 
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <input name="phone" type="text" class="form-control" id="phone" placeholder="Telefónne číslo" required>
+                                        <input name="phone" type="phone" class="form-control" id="phone" placeholder="Telefónne číslo" required="">
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <select required class="person" name='persons' onchange='this.form.submit()'>
+                                        <select required class="person" name='persons' onchange='this.form.()'>
                                             <option value="">Koľko ľudí?</option>
                                             <option value="1-osoba">1 </option>
                                             <option value="2-osoby">2 </option>
@@ -73,7 +76,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
-                                        <button type="submit" class="btn">Booknite si stôl</button>
+                                        <button type="submit" id="form-submit" class="btn">Booknite si stôl</button>
                                     </fieldset>
                                 </div>
                             </div>
@@ -83,4 +86,4 @@
             </div>
         </div>
     </section>
-</form>
+</form> 
