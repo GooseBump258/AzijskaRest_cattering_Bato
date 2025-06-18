@@ -1,0 +1,70 @@
+<?php
+
+?>
+
+<section class="reviews-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <?php
+                    // Zobrazenie úspešných/chybových správ
+                    if (isset($_SESSION['success_message'])) {
+                        echo '<p class="message success">' . htmlspecialchars($_SESSION['success_message']) . '</p>';
+                        unset($_SESSION['success_message']);
+                    }
+                    if (isset($_SESSION['error_message'])) {
+                        echo '<p class="message error">' . htmlspecialchars($_SESSION['error_message']) . '</p>';
+                        unset($_SESSION['error_message']);
+                    }
+                    ?>
+
+                    <?php if ($is_logged_in): // Zobraz formulár len pre prihlásených používateľov ?>
+                        <div class="add-review-form">
+                            <h3>Pridať vašu recenziu</h3>
+                            <form action="add_review.php" method="POST">
+                                <label for="rating">Vaše hodnotenie:</label>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5" name="rating" value="5" required /><label for="star5" title="5 hviezdičiek">★</label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 hviezdičky">★</label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 hviezdičky">★</label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 hviezdičky">★</label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 hviezdička">★</label>
+                                </div>
+                                <label for="review_text">Vaša recenzia:</label>
+                                <textarea id="review_text" name="review_text" rows="6" placeholder="Napíšte svoju recenziu tu..." required></textarea>
+                                <button type="submit" name="submit_review">Odoslať recenziu</button>
+                            </form>
+                        </div>
+                    <?php else: ?>
+                        <p class="message error">Pre pridanie recenzie sa musíte <a href="#" id="login-button-for-review">prihlásiť</a> alebo <a href="register.php">zaregistrovať</a>.</p>
+                    <?php endif; ?>
+
+                    <h3>Existujúce recenzie</h3>
+                    <?php if (empty($reviews)): ?>
+                        <p>Zatiaľ nemáme žiadne recenzie. Buďte prvý, kto pridá recenziu!</p>
+                    <?php else: ?>
+                        <?php foreach ($reviews as $review): ?>
+                            <div class="review-item">
+                                <div class="reviewer-info">
+                                    <h4><?php echo htmlspecialchars($review['username']); ?></h4>
+                                    <div class="rating">
+                                        <?php for ($i = 0; $i < $review['rating']; $i++): ?>
+                                            ★
+                                        <?php endfor; ?>
+                                        <?php for ($i = 0; $i < (5 - $review['rating']); $i++): ?>
+                                            ☆
+                                        <?php endfor; ?>
+                                    </div>
+                                </div>
+                                <p class="review-text"><?php echo nl2br(htmlspecialchars($review['review_text'])); ?></p>
+                                <p class="review-date">Odoslané: <?php echo date('d.m.Y H:i', strtotime($review['created_at'])); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
