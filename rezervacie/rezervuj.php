@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$den, $hodina]);
         $pocetRezervacii = $stmt->fetchColumn();
 
-        if ($pocetRezervacii >= 5) {
+        if ($pocetRezervacii >= 3) {
             // Dni týždňa v poradí (ak máš iný formát, uprav)
             $dni = ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa'];
 
