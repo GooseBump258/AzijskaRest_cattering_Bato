@@ -20,21 +20,7 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="right-info">
                         <h4>Rezervácia</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset>
-                                    <select required name="day">
-                                        <option value="">Vyberte si deň</option>
-                                        <option value="Pondelok">Pondelok</option>
-                                        <option value="Utorok">Utorok</option>
-                                        <option value="Streda">Streda</option>
-                                        <option value="Štvrtok">Štvrtok</option>
-                                        <option value="Piatok">Piatok</option>
-                                        <option value="Sobota">Sobota</option>
-                                        <option value="Nedeľa">Nedeľa</option>
-                                    </select>
-                                </fieldset>
-                            </div>
+                        
                             <div class="col-md-6">
                                 <fieldset>
                                     <input type="date" name="datum_rezervacie" required>
