@@ -81,7 +81,7 @@ foreach ($menu_items as $item) {
                 transform: translateY(-5px);
             }
             .food-item img {
-                width: 100%;
+                width: 1000%;
                 height: auto; /* obrazok nebude orezany, zachova proporcie */
                 max-height: 250px; /* maximalna vyska pre jednotny rozmer */
                 object-fit: contain; /* obrazok sa prispôsobí celej ploche bez orezania */
