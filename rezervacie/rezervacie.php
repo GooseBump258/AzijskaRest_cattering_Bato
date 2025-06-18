@@ -50,12 +50,12 @@ try {
             margin-bottom: 30px;
         }
         .page-heading h1 {
-            color: #f2f2f2;
+            color:rgb(0, 0, 0);
             font-size: 3em;
             margin-bottom: 10px;
         }
         .page-heading p {
-            color: #f2f2f2;
+            color:rgb(0, 0, 0);
             font-size: 1.1em;
         }
         .table-container {
