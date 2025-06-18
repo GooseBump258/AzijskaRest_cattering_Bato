@@ -1,7 +1,7 @@
 <?php
 // rezervacie.php
 session_start();
-require_once 'db_config.php';
+require_once 'triedy/db_config.php';
 
 // pripojenie k databáze
 $conn = new mysqli($servername, $username, $password, $dbname);
