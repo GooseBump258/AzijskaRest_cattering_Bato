@@ -68,12 +68,15 @@ foreach ($menu_items as $item) {
                 padding-left: 15px;
             }
             .food-item {
+    width: 250px;
+    height: 280px;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     overflow: hidden;
-    margin-bottom: 25px;
+    margin: 0 auto 30px auto;
     display: flex;
+    flex-direction: column;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
 }
@@ -84,13 +87,13 @@ foreach ($menu_items as $item) {
 }
 
 .food-item img {
-    width: 250px;
-    height: 180px;
+    width: 100%;
+    height: 140px;
     object-fit: cover;
-    flex-shrink: 0;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
     background-color: #f0f0f0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    flex-shrink: 0;
 }
 
 .food-item .price {
@@ -99,42 +102,47 @@ foreach ($menu_items as $item) {
     right: 15px;
     background-color: #d9534f;
     color: white;
-    padding: 8px 14px;
+    padding: 6px 12px;
     border-radius: 30px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-    z-index: 20;
+    z-index: 10;
 }
 
 .food-item .text-content {
-    padding: 20px 30px;
-    flex: 1;
+    padding: 15px 20px;
+    flex-grow: 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .food-item .text-content h4 {
-    font-size: 24px;
-    margin-top: 0;
-    margin-bottom: 12px;
+    font-size: 18px;
+    margin: 0 0 10px 0;
     color: #222;
     font-weight: 700;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
+    text-align: center;
 }
 
 .food-item .text-content p {
-    font-size: 14px;
+    font-size: 13px;
     color: #555;
-    line-height: 1.6;
+    line-height: 1.4;
     margin: 0;
+    text-align: center;
 }
 
-/* Aby cena nebola mimo obrázku, upravíme pozíciu na text-content */
+/* Aby cena bola vo vrchnej časti nad obrázkom */
 .food-item .price {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 10px;
+    right: 10px;
 }
+
             .food-item .text-content {
                 padding: 50px;
             }
