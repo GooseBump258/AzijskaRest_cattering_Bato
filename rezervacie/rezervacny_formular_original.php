@@ -23,15 +23,20 @@
                         <form id="form-submit-inner" action="" method="get">
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div class="col-md-6">
                                     <fieldset>
-                                        <input 
-                                            required 
-                                            type="text" 
-                                            name="day" 
-                                            class="form-control" 
-                                            placeholder="Zadajte dátum (napr. 18.06.2025)"
-                                        >
+                                        <select required name='day' onchange='this.form.()'>
+                                            <option value="">Vyberte si deň</option>
+                                            <option value="Pondelok">Pondelok</option>
+                                            <option value="Utorok">Utorok</option>
+                                            <option value="Streda">Streda</option>
+                                            <option value="Štvrtok">Štvrtok</option>
+                                            <option value="Piatok">Piatok</option>
+                                            <option value="Sobota">Sobota</option>
+                                            <option value="Nedeľa">Nedeľa</option>
+                                        </select>
                                     </fieldset>
+                                </div>
                                 </div>
                                 <div class="col-md-6">
                                     <fieldset>
