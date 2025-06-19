@@ -1,27 +1,4 @@
 <?php
-class Reviews {
-    private $pdo;
-    public $error_message = '';
-    public $success_message = '';
-    private $reviews = [];
-
-    public function __construct($pdo) {
-        $this->pdo = $pdo;
-    }
-
-    public function fetchAll() {
-        try {
-            $stmt = $this->pdo->query("SELECT r.review_text, r.rating, r.created_at, u.username 
-                                       FROM reviews r JOIN users u ON r.user_id = u.id 
-                                       ORDER BY r.created_at DESC");
-            $this->reviews = $stmt->fetchAll();
-        } catch (PDOException $e) {
-            $this->error_message = "Nepodarilo sa načítať recenzie: " . $e->getMessage();
-        }
-        return $this->reviews;
-    }
-}
-
 class AddReview {
     private $pdo;
     private $user_id;
