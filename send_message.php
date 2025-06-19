@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . 'triedy/db_config.php'); 
+require_once(__DIR__ . '/triedy/db_config.php'); 
 
 $meno = $_POST['name'];
 $email = $_POST['email'];
