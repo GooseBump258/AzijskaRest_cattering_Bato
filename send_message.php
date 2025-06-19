@@ -1,10 +1,6 @@
 <?php
-require_once(__DIR__ . '/triedy/db_config.php');
+require_once(__DIR__ . '/triedy/db_config.php'); 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Nepodarilo sa pripojiť: " . $conn->connect_error);
-}
 
 $meno = $_POST['name'];
 $email = $_POST['email'];
