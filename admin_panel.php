@@ -1,15 +1,12 @@
 <?php
 session_start();
-require_once(__DIR__ . '/triedy/db_config.php'); // <--- Uisti sa, že toto existuje a správne nastavuje $pdo
-
-// Kontrola, či je používateľ prihlásený
+require_once(__DIR__ . '/triedy/db_config.php'); 
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
     header('Location: index.php');
     exit();
 }
 
-// Overenie roly z databázy
 $user_id = $_SESSION['user_id'];
 $stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
@@ -21,7 +18,6 @@ if (!$user || $user['role'] !== 'admin') {
     exit();
 }
 
-// Ak sa kód dostane sem, používateľ je prihlásený a je admin
 $admin_username = htmlspecialchars($_SESSION['username']);
 ?>
 <!DOCTYPE html>
@@ -58,7 +54,7 @@ $admin_username = htmlspecialchars($_SESSION['username']);
     </style>
 </head>
 <body>
-    <?php require_once 'parts/header.html'; // Includujeme hlavičku ?>
+    <?php require_once 'parts/header.html';  ?>
 
     <div class="admin-container">
         <h2>Vitajte v Admin Paneli, <?php echo $admin_username; ?>!</h2>

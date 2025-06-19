@@ -2,14 +2,12 @@
 session_start();
 require_once(__DIR__ . '/triedy/db_config.php'); // <--- Uisti sa, že toto existuje a správne nastavuje $pdo
 
-// Kontrola, či je používateľ prihlásený
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error_message'] = "Nemáte oprávnenie pre prístup k admin panelu.";
     header('Location: index.php');
     exit();
 }
 
-// Overenie roly z databázy
 $user_id = $_SESSION['user_id'];
 $stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
@@ -23,10 +21,8 @@ if (!$user || $user['role'] !== 'admin') {
 
 $success_message = '';
 $error_message = '';
-$edit_item = null; // Pre ukladanie položky, ktorá sa upravuje
+$edit_item = null; 
 
-// --- Spracovanie formulárov ---
-// Pridanie/Úprava položky
 if (isset($_POST['submit_item'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
@@ -39,10 +35,9 @@ if (isset($_POST['submit_item'])) {
     } elseif ($price <= 0) {
         $error_message = "Cena musí byť kladné číslo.";
     } else {
-        // Spracovanie obrázka
         $image_path = '';
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $target_dir = "uploads/"; // Uistite sa, že tento priečinok existuje a má práva na zápis
+            $target_dir = "uploads/"; 
             if (!is_dir($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
@@ -50,30 +45,25 @@ if (isset($_POST['submit_item'])) {
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             $uploadOk = 1;
 
-            // Kontrola typu súboru
             $check = getimagesize($_FILES["image"]["tmp_name"]);
             if($check !== false) {
-                // Súbor je obrázok
             } else {
                 $error_message = "Súbor nie je obrázok.";
                 $uploadOk = 0;
             }
 
-            // Povolené formáty
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
                 $error_message = "Prepáčte, povolené sú len JPG, JPEG, PNG & GIF súbory.";
                 $uploadOk = 0;
             }
 
-            // Kontrola veľkosti
             if ($_FILES["image"]["size"] > 500000) { // Max 500KB
                 $error_message = "Prepáčte, váš súbor je príliš veľký.";
                 $uploadOk = 0;
             }
 
             if ($uploadOk == 0) {
-                // Chyba pri nahrávaní súboru
             } else {
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                     $image_path = $target_file;
@@ -85,7 +75,6 @@ if (isset($_POST['submit_item'])) {
 
         try {
             if ($item_id > 0) {
-                // Aktualizácia existujúcej položky
                 $sql = "UPDATE menu_items SET name = :name, description = :description, price = :price, category = :category";
                 if ($image_path) {
                     $sql .= ", image_path = :image_path";
@@ -99,7 +88,7 @@ if (isset($_POST['submit_item'])) {
                 $stmt->execute($params);
                 $success_message = "Položka menu bola úspešne aktualizovaná.";
             } else {
-                // Pridanie novej položky
+                
                 $stmt = $pdo->prepare("INSERT INTO menu_items (name, description, price, category, image_path) VALUES (:name, :description, :price, :category, :image_path)");
                 $stmt->execute([
                     'name' => $name,
@@ -112,7 +101,7 @@ if (isset($_POST['submit_item'])) {
             }
         } catch (PDOException $e) {
             $error_message = "Chyba databázy: " . $e->getMessage();
-            // error_log($e->getMessage()); // Pre logovanie na serveri
+            
         }
     }
 }
@@ -127,11 +116,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
     } catch (PDOException $e) {
         $error_message = "Chyba pri mazaní položky: " . $e->getMessage();
     }
-    header('Location: manage_menu.php'); // Presmeruj, aby sa odstránili GET parametre
+    header('Location: manage_menu.php'); 
     exit();
 }
 
-// Načítanie položky na úpravu
 if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
     $item_id = intval($_GET['id']);
     try {
@@ -146,7 +134,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
     }
 }
 
-// Načítanie všetkých položiek menu pre zobrazenie
 $menu_items = [];
 try {
     $stmt = $pdo->query("SELECT * FROM menu_items ORDER BY category, name");

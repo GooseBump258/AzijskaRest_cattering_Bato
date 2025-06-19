@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <div class="section-heading">
                         <h2>Správa</h2> </div>
-                    <form id="contact" action="" method="post">
+                    <form id="contact" action=send_message" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <fieldset>
@@ -96,24 +96,20 @@
 
     <script type="text/javascript">
     $(document).ready(function() {
-        // akcie kliknutí pre navigáciu
         $('.scroll-link').on('click', function(event){
             event.preventDefault();
             var sectionID = $(this).attr("data-id");
             scrollToID('#' + sectionID, 750);
         });
-        // akcia posunu na vrch
         $('.scroll-top').on('click', function(event) {
             event.preventDefault();
             $('html, body').animate({scrollTop:0}, 'slow');         
         });
-        // prepnutie mobilnej navigácie
         $('#nav-toggle').on('click', function (event) {
             event.preventDefault();
             $('#main-nav').toggleClass("open");
         });
     });
-    // funkcia posunu
     function scrollToID(id, speed){
         var offSet = 0;
         var targetOffset = $(id).offset().top - offSet;

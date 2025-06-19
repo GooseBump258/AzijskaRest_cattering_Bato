@@ -1,44 +1,21 @@
 <?php
-// send_message.php
+require_once(__DIR__ . '/triedy/db_config.php'); 
 
-// Nastav tvoj e-mail, kam sa majú posielať správy
-$to_email = "samo.bato6@gmail.com"; // ZMEŇ TOTO NA SVOJ E-MAIL!
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Získaj a ošetruj vstupné dáta z formulára
-    $name = htmlspecialchars(trim($_POST['name']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $phone = htmlspecialchars(trim($_POST['phone']));
-    $message = htmlspecialchars(trim($_POST['message']));
 
-    // Predmet e-mailu
-    $subject = "Nová správa z kontaktného formulára od: " . $name;
+$meno = $_POST['name'];
+$email = $_POST['email'];
+$telefon = $_POST['phone'];
+$sprava = $_POST['message'];
 
-    // Telo e-mailu
-    $email_body = "Meno: " . $name . "\n";
-    $email_body .= "E-mail: " . $email . "\n";
-    $email_body .= "Telefón: " . $phone . "\n\n";
-    $email_body .= "Správa:\n" . $message;
+$sql = "INSERT INTO kontakty (meno, email, telefon, sprava)
+        VALUES ('$meno', '$email', '$telefon', '$sprava')";
 
-    // Hlavičky e-mailu
-    $headers = "From: " . $email . "\r\n"; // Odosielateľ je e-mail užívateľa
-    $headers .= "Reply-To: " . $email . "\r\n";
-    $headers .= "Content-type: text/plain; charset=UTF-8\r\n"; // Zabezpečí správne kódovanie
-
-    // Skús odoslať e-mail
-    if (mail($to_email, $subject, $email_body, $headers)) {
-        // E-mail bol úspešne odoslaný
-        // Môžeš sem pridať presmerovanie na stránku s potvrdením
-        header("Location: contact.php?status=success");
-        exit();
-    } else {
-        // Nastala chyba pri odosielaní e-mailu
-        header("Location: contact.php?status=error");
-        exit();
-    }
+if ($conn->query($sql) === TRUE) {
+    echo "<script>alert('Správa bola úspešne odoslaná!');window.location.href='kontakt.php';</script>";
 } else {
-    // Ak sa niekto pokúsi pristupovať k tomuto súboru priamo
-    header("Location: contact.php"); // Presmeruj ich späť na kontaktnú stránku
-    exit();
+    echo "Chyba: " . $conn->error;
 }
+
+$conn->close();
 ?>

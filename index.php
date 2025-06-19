@@ -3,10 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<!--
-Victory HTML CSS Template
-https://templatemo.com/tm-507-victory
--->
+
         <title>Victory HTML CSS Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,9 +23,7 @@ https://templatemo.com/tm-507-victory
     </head>
 
 <body>
-    <!-- header -->
      <?php require_once 'parts/header.html' ?>
-    <!-- header -->
 
 
     <section class="banner">
@@ -200,24 +195,20 @@ https://templatemo.com/tm-507-victory
 
     <script type="text/javascript">
     $(document).ready(function() {
-        // navigation click actions 
         $('.scroll-link').on('click', function(event){
             event.preventDefault();
             var sectionID = $(this).attr("data-id");
             scrollToID('#' + sectionID, 750);
         });
-        // scroll to top action
         $('.scroll-top').on('click', function(event) {
             event.preventDefault();
             $('html, body').animate({scrollTop:0}, 'slow');         
         });
-        // mobile nav toggle
         $('#nav-toggle').on('click', function (event) {
             event.preventDefault();
             $('#main-nav').toggleClass("open");
         });
     });
-    // scroll function
     function scrollToID(id, speed){
         var offSet = 0;
         var targetOffset = $(id).offset().top - offSet;

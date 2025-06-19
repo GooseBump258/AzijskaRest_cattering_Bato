@@ -4,23 +4,18 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once(__DIR__ . '/triedy/db_config.php'); // Pripojenie k databáze
-
-// Skontroluj, či je používateľ prihlásený
+require_once(__DIR__ . '/triedy/db_config.php'); 
 $is_logged_in = isset($_SESSION['user_id']);
 $current_username = $is_logged_in ? htmlspecialchars($_SESSION['username']) : '';
 
-// Načítanie recenzií z databázy
 $reviews = [];
 try {
-    // Získaj recenzie spolu s používateľským menom autora
     $stmt = $pdo->query("SELECT r.review_text, r.rating, r.created_at, u.username 
                           FROM reviews r JOIN users u ON r.user_id = u.id 
                           ORDER BY r.created_at DESC");
     $reviews = $stmt->fetchAll();
 } catch (PDOException $e) {
     $_SESSION['error_message'] = "Nepodarilo sa načítať recenzie: " . $e->getMessage();
-    // V produkcii: error_log($e->getMessage());
 }
 ?>
 <!DOCTYPE html>
@@ -46,7 +41,6 @@ try {
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
         <style>
-            /* Základné štýly z minulej odpovede pre správy */
             .message {
                 padding: 12px;
                 margin-bottom: 20px;
@@ -66,7 +60,6 @@ try {
                 border: 1px solid #f5c6cb;
             }
 
-            /* Nové štýly pre sekciu recenzií */
             .reviews-section {
                 padding: 60px 0;
             }
@@ -100,7 +93,7 @@ try {
                 font-size: 16px;
             }
             .add-review-form button {
-                background-color: #007bff; /* Modré tlačidlo */
+                background-color: #007bff; 
                 color: white;
                 padding: 12px 20px;
                 border: none;
@@ -133,7 +126,7 @@ try {
                 font-size: 1.3em;
             }
             .review-item .rating {
-                color: #ffc107; /* Zlatá farba pre hviezdy */
+                color: #ffc107; 
                 font-size: 1.2em;
             }
             .review-item .review-text {
@@ -147,23 +140,23 @@ try {
                 text-align: right;
             }
             .star-rating {
-                direction: rtl; /* Pre zarovnanie hviezd sprava doľava */
+                direction: rtl; 
                 display: inline-block;
-                unicode-bidi: bidi-override; /* Pre správne zobrazenie v starších prehliadačoch */
+                unicode-bidi: bidi-override;
             }
             .star-rating input[type="radio"] {
-                display: none; /* Skrytie predvolených rádio buttonov */
+                display: none; 
             }
             .star-rating label {
-                font-size: 2em; /* Veľkosť hviezdy */
-                color: #ccc; /* Predvolená farba hviezdy */
+                font-size: 2em; 
+                color: #ccc; 
                 cursor: pointer;
                 padding: 0 5px;
             }
             .star-rating input[type="radio"]:checked ~ label,
             .star-rating label:hover,
             .star-rating label:hover ~ label {
-                color: #ffc107; /* Farba hviezdy po zaškrtnutí alebo prejdení myšou */
+                color: #ffc107; 
             }
         </style>
     </head>
@@ -186,7 +179,6 @@ try {
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <?php
-                    // Zobrazenie úspešných/chybových správ
                     if (isset($_SESSION['success_message'])) {
                         echo '<p class="message success">' . htmlspecialchars($_SESSION['success_message']) . '</p>';
                         unset($_SESSION['success_message']);
@@ -197,7 +189,7 @@ try {
                     }
                     ?>
 
-                    <?php if ($is_logged_in): // Zobraz formulár len pre prihlásených používateľov ?>
+                    <?php if ($is_logged_in): ?>
                         <div class="add-review-form">
                             <h3>Pridať vašu recenziu</h3>
                             <form action="add_review.php" method="POST">
@@ -273,16 +265,12 @@ try {
             $('#main-nav').toggleClass("open");
         });
 
-        // Prihlásenie pre recenzie - ak používateľ nie je prihlásený a klikne na odkaz
         $('#login-button-for-review').on('click', function(e) {
             e.preventDefault();
-            // Spusti kód, ktorý otvára prihlasovacie modálne okno
-            // Predpokladáme, že máš v parts/header.html definované id "login-modal"
             $('#login-modal').css('display', 'block');
         });
     });
 
-    // scroll function
     function scrollToID(id, speed){
         var offSet = 0;
         var targetOffset = $(id).offset().top - offSet;
