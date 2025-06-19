@@ -1,41 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+// PHP kód musí byť na úplnom začiatku tohto súboru,
+// aby sa zabezpečilo správne spustenie session pred akýmkoľvek HTML výstupom.
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-    <div class="header">
-        <div class="container">
-            <a href="#" class="navbar-brand scroll-top">BatoRes</a>
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <!--/.navbar-header-->
-                <div id="main-nav" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.php">Domov</a></li>
-                        <li><a href="menu.php">Aktuálna ponuka</a></li>
-                        <li><a href="blog.php">Blog</a></li>
-                        <li><a href="contact.php">Kontaktujte nás</a></li>
-                    </ul>
-                </div>
-                <!--/.navbar-collapse-->
+// Kontrolujeme, či je používateľ prihlásený.
+// Variabilná 'user_id' sa nastaví do $_SESSION po úspešnom prihlásení v login_process.php.
+$is_logged_in = isset($_SESSION['user_id']);
+
+// Ak je používateľ prihlásený, získame jeho používateľské meno pre zobrazenie v hlavičke.
+// htmlspecialchars() sa používa pre bezpečnosť, aby sa predišlo XSS útokom.
+$username = $is_logged_in ? htmlspecialchars($_SESSION['username']) : '';
+?>
+
+<div class="header">
+    <div class="container">
+        <a href="index.php" class="navbar-brand scroll-top">BatoRes</a>
+
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="main-nav" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php">Domov</a></li>
+                    <li><a href="menu.php">Naše menu</a></li>
+                    <li><a href="reviews.php">Recenzie</a></li> <li><a href="contact.php">Kontaktujte nás</a></li>
+
+                    <?php if ($is_logged_in): ?>
+                        <li><a href="#">Vitajte, <?php echo $username; ?>!</a></li>
+                        <li><a href="prihlasovanie/logout.php">Odhlásiť sa</a></li>
+                    <?php else: ?>
+                        <li><a href="#" id="login-button">Prihlásiť sa</a></li>
+                        <li><a href="prihlasovanie/register.php">Registrovať sa</a>
+</li>
+                    <?php endif; ?>
+                </ul>
+            </div>
             </nav>
-            <!--/.navbar-->
         </div>
-        <!--/.container-->
     </div>
-    <!--/.header-->
-    
-</body>
-</html>
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Prihlásenie</h2>
 
+        <?php
+        // Zobrazenie chybových a úspešných správ z PHP skriptov
+        // Správy sú uložené v $_SESSION a po zobrazení sa vymažú.
+
+        // Správa o chybe pri prihlásení
+        if (isset($_SESSION['error_message'])) {
+            echo '<p class="message error">' . htmlspecialchars($_SESSION['error_message']) . '</p>';
+            unset($_SESSION['error_message']); // Vymazať správu po zobrazení
+            // Automaticky otvoriť modálne okno, ak prišla chybová správa
+            echo '<script>document.addEventListener("DOMContentLoaded", function() { document.getElementById("login-modal").style.display = "block"; });</script>';
+        }
+
+        // Správa o úspešnej registrácii
+        if (isset($_SESSION['registration_success'])) {
+            echo '<p class="message success">' . htmlspecialchars($_SESSION['registration_success']) . '</p>';
+            unset($_SESSION['registration_success']); // Vymazať správu po zobrazení
+            // Automaticky otvoriť modálne okno po úspešnej registrácii (pre ľahšie prihlásenie)
+            echo '<script>document.addEventListener("DOMContentLoaded", function() { document.getElementById("login-modal").style.display = "block"; });</script>';
+        }
+        ?>
+
+        <form class="login-form" action="prihlasovanie/login_process.php" method="POST">
+            <label for="username_email">Používateľské meno alebo E-mail:</label>
+            <input type="text" id="username_email" name="username_email" required>
+
+            <label for="password">Heslo:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Prihlásiť sa</button>
+        </form>
+        <p>Nemáte účet? <a href="prihlasovanie/register.php">Registrujte sa tu</a>.</p>
+    </div>
+</div>
+
+<style>
+    .modal {
+        display: none; /* Skryté predvolene */
+        position: fixed; /* Zostane na mieste aj pri posúvaní */
+        z-index: 1000; /* Leží nad ostatným obsahom */
+        left: 0;
+        top: 0;
+        width: 100%; /* Plná šírka */
+        height: 100%; /* Plná výška */
+        overflow: auto; /* Ak je obsah príliš veľký, umožní posúvanie */
+        background-color: rgba(0,0,0,0.6); /* Tmavé pozadie s priesvitnosťou */
+        padding-top: 50px; /* Priestor od vrchu */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto; /* 5% zhora a centrované */
+        padding: 30px;
+        border: 1px solid #888;
+        width: 90%;
+        max-width: 450px; /* Maximálna šírka modálneho okna */
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        position: relative;
+    }
+
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 20px;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .login-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .login-form button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-form button:hover {
+        background-color: #45a049;
+    }
+
+    .message {
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 1em;
+        line-height: 1.4;
+    }
+    .message.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    .message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var loginButton = document.getElementById('login-button');
+        var loginModal = document.getElementById('login-modal');
+        // Špecifickejší selektor, aby sme sa uistili, že cieli na správne tlačidlo "x"
+        var closeButton = document.querySelector('#login-modal .close-button');
+
+        // Ak existuje tlačidlo "Prihlásiť sa", pridáme mu poslucháča udalosti click
+        if (loginButton) {
+            loginButton.addEventListener('click', function(e) {
+                e.preventDefault(); // Zabraňuje predvolenému správaniu odkazu (napr. skoku na #)
+                loginModal.style.display = 'block'; // Zobrazí modálne okno
+            });
+        }
+
+        // Ak existuje tlačidlo "x" (zatvoriť), pridáme mu poslucháča udalosti click
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                loginModal.style.display = 'none'; // Skryje modálne okno
+            });
+        }
+
+        // Zatvorenie modálneho okna kliknutím mimo jeho obsah
+        window.addEventListener('click', function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+    });
+</script>
