@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <div class="section-heading">
                         <h2>Správa</h2> </div>
-                    <form id="contact" action=send_message" method="post">
+                    <form id="contact" action=send_message.php" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <fieldset>
