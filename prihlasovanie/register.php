@@ -4,63 +4,19 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 require_once(__DIR__ . '/../triedy/db_config.php');
+require_once(__DIR__ . '/../triedy/UserRegistration.php');
+
+$registration = new UserRegistration($pdo);
 
 if (isset($_POST['register_submit'])) {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $result = $registration->register($_POST);
 
-    $errors = [];
-
-    if (empty($username)) {
-        $errors[] = "Používateľské meno je povinné.";
-    } elseif (strlen($username) < 3 || strlen($username) > 50) {
-        $errors[] = "Používateľské meno musí mať 3 až 50 znakov.";
-    }
-
-    if (empty($email)) {
-        $errors[] = "E-mail je povinný.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Zadajte platný e-mailový formát.";
-    }
-
-    if (empty($password)) {
-        $errors[] = "Heslo je povinné.";
-    } elseif (strlen($password) < 8) {
-        $errors[] = "Heslo musí mať aspoň 8 znakov.";
-    } elseif ($password !== $confirm_password) {
-        $errors[] = "Heslá sa nezhodujú.";
-    }
-
-    // Pokračuj len ak nie sú chyby
-    if (empty($errors)) {
-        try {
-            $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username OR email = :email");
-            $stmt->execute(['username' => $username, 'email' => $email]);
-            $count = $stmt->fetchColumn();
-
-            if ($count > 0) {
-                $errors[] = "Používateľské meno alebo e-mail už existuje. Vyberte si iné.";
-            } else {
-                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-                $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-                if ($stmt->execute(['username' => $username, 'email' => $email, 'password' => $hashed_password])) {
-                    $_SESSION['registration_success'] = "Registrácia bola úspešná! Teraz sa môžete prihlásiť.";
-                    header('Location: ../index.php');
-                    exit();
-                } else {
-                    $errors[] = "Chyba pri ukladaní používateľa do databázy.";
-                }
-            }
-        } catch (PDOException $e) {
-            $errors[] = "Chyba databázy pri registrácii.";
-        }
-    }
-
-    if (!empty($errors)) {
-        $_SESSION['registration_error'] = implode('<br>', $errors);
+    if ($result) {
+        $_SESSION['registration_success'] = "Registrácia bola úspešná! Teraz sa môžete prihlásiť.";
+        header('Location: ../index.php');
+        exit();
+    } else {
+        $_SESSION['registration_error'] = implode('<br>', $registration->getErrors());
     }
 }
 ?>
@@ -68,10 +24,10 @@ if (isset($_POST['register_submit'])) {
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Registrácia</title>
-    <link rel="stylesheet" href="path/to/your/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/your/bootstrap.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,7 +42,7 @@ if (isset($_POST['register_submit'])) {
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 400px;
         }
@@ -166,10 +122,10 @@ if (isset($_POST['register_submit'])) {
 
     <form class="register-form" action="register.php" method="POST">
         <label for="username">Používateľské meno:</label>
-        <input type="text" id="username" name="username" required value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
+        <input type="text" id="username" name="username" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
 
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
+        <input type="email" id="email" name="email" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
 
         <label for="password">Heslo:</label>
         <input type="password" id="password" name="password" required>
