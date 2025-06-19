@@ -9,11 +9,7 @@ $sprava = $_POST['message'];
 $sql = "INSERT INTO kontakty (meno, email, telefon, sprava)
         VALUES ('$meno', '$email', '$telefon', '$sprava')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "<script>alert('Správa bola úspešne odoslaná!');window.location.href='contact.php';</script>";
-} else {
-    echo "Chyba: " . $conn->error;
-}
+
 
 $conn->close();
 ?>
