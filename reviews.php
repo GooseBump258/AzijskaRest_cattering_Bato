@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 require_once(__DIR__ . '/triedy/db_config.php');
-require_once(__DIR__ . '/triedy/addreview.php');
+require_once(__DIR__ . '/triedy/add_review.php');
 
 $is_logged_in = isset($_SESSION['user_id']);
 $current_username = $is_logged_in ? htmlspecialchars($_SESSION['username']) : '';
@@ -40,7 +40,7 @@ if (isset($_POST['submit_review'])) {
 <head>
     <meta charset="utf-8">
     <title>Victory - Recenzie</title>
-    <!-- tvoj CSS a JS odkazy z pôvodného kódu -->
+    <!-- tu pridaj tvoje CSS a JS odkazy -->
 </head>
 <body>
     <?php require_once 'parts/header.html'; ?>
@@ -113,7 +113,7 @@ if (isset($_POST['submit_review'])) {
 
     <?php require_once 'parts/footer.html'; ?>
 
-    <!-- tvoj JS z pôvodného kódu -->
+    <!-- tu pridaj tvoj JS -->
 
 </body>
 </html>
