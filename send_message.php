@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once '/triedy/db_config.php';
-
+require_once __DIR__ . '/triedy/db_config.php';
     $meno = $_POST['name'];
     $email = $_POST['email'];
     $telefon = $_POST['phone'];
