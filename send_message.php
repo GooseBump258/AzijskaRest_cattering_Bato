@@ -1,24 +1,32 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-require_once __DIR__ . '/triedy/db_config.php';
+    require_once 'triedy/db_config.php';
+
     $meno = $_POST['name'];
     $email = $_POST['email'];
     $telefon = $_POST['phone'];
     $sprava = $_POST['message'];
     $datum = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO kontakty (meno, email, telefon, sprava, datum) 
-            VALUES ('$meno', '$email', '$telefon', '$sprava', '$datum')";
+    try {
+        $sql = "INSERT INTO kontakty (meno, email, telefon, sprava, datum) 
+                VALUES (:meno, :email, :telefon, :sprava, :datum)";
 
-    if ($conn->query($sql) === TRUE) {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':meno' => $meno,
+            ':email' => $email,
+            ':telefon' => $telefon,
+            ':sprava' => $sprava,
+            ':datum' => $datum
+        ]);
+
         echo "<script>alert('Správa bola úspešne odoslaná.'); window.location.href='contact.php';</script>";
-    } else {
-        echo "Chyba: " . $sql . "<br>" . $conn->error;
+    } catch (PDOException $e) {
+        echo "Chyba pri ukladaní správy: " . $e->getMessage();
     }
-
-    $conn->close();
 } else {
-    header("Location: kontakt.php");
+    header("Location: contact.php");
     exit();
 }
 ?>
