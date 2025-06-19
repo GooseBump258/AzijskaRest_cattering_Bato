@@ -4,30 +4,11 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 require_once(__DIR__ . '/triedy/db_config.php');
+require_once(__DIR__ . '/triedy/MenuManager.php');
 
-$menu_items = [];
-try {
-    $stmt = $pdo->query("SELECT * FROM menu_items ORDER BY category, name");
-    $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    $menu_items = [];
-    $_SESSION['error_message'] = "Nastala chyba pri načítaní menu. Prosím, skúste to neskôr.";
-}
-
-$categorized_menu = [
-    'Predjedlá' => [],
-    'Hlavné jedlá' => [],
-    'Dezerty' => [],
-    'Nápoje' => []
-];
-
-foreach ($menu_items as $item) {
-    if (isset($categorized_menu[$item['category']])) {
-        $categorized_menu[$item['category']][] = $item;
-    } else {
-        $categorized_menu[$item['category']][] = $item;
-    }
-}
+$menuManager = new MenuManager($pdo);
+$menu_items = $menuManager->getAllItems();
+$categorized_menu = $menuManager->categorizeItems($menu_items);
 ?>
 <!DOCTYPE html>
 <html>
