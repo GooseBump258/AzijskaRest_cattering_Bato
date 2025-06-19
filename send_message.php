@@ -11,5 +11,4 @@ $sql = "INSERT INTO kontakty (meno, email, telefon, sprava)
 
 
 
-$conn->close();
 ?>
